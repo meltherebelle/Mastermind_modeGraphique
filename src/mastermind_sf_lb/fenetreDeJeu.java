@@ -26,11 +26,137 @@ public class fenetreDeJeu extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        panneau_grille = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        panneau_message = new javax.swing.JPanel();
+        lbl_message = new javax.swing.JLabel();
+        panneau_couleurs = new javax.swing.JPanel();
+        lbl_palette_couleurs = new javax.swing.JLabel();
+        lbl_palette_couleurs1 = new javax.swing.JLabel();
+        couleur1 = new javax.swing.JButton();
+        couleur4 = new javax.swing.JButton();
+        couleur2 = new javax.swing.JButton();
+        couleur5 = new javax.swing.JButton();
+        couleur3 = new javax.swing.JButton();
+        couleur6 = new javax.swing.JButton();
+        panneau_infos = new javax.swing.JPanel();
+        lbl_infos_partie = new javax.swing.JLabel();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        panneau_grille.setBackground(new java.awt.Color(204, 204, 204));
+        panneau_grille.setLayout(new java.awt.GridLayout(12, 0));
+        getContentPane().add(panneau_grille, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 120, 550, 520));
+
+        jLabel1.setFont(new java.awt.Font("American Typewriter", 0, 24)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("MasterMind");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 26, 560, 40));
+
+        panneau_message.setBackground(new java.awt.Color(153, 153, 153));
+
+        lbl_message.setText("Messages :");
+
+        javax.swing.GroupLayout panneau_messageLayout = new javax.swing.GroupLayout(panneau_message);
+        panneau_message.setLayout(panneau_messageLayout);
+        panneau_messageLayout.setHorizontalGroup(
+            panneau_messageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panneau_messageLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lbl_message)
+                .addContainerGap(325, Short.MAX_VALUE))
+        );
+        panneau_messageLayout.setVerticalGroup(
+            panneau_messageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panneau_messageLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lbl_message)
+                .addContainerGap(58, Short.MAX_VALUE))
+        );
+
+        getContentPane().add(panneau_message, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 20, 400, 80));
+
+        panneau_couleurs.setBackground(new java.awt.Color(153, 153, 153));
+        panneau_couleurs.setLayout(new java.awt.GridLayout(4, 3));
+
+        lbl_palette_couleurs.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbl_palette_couleurs.setText("Palette de couleurs :");
+        panneau_couleurs.add(lbl_palette_couleurs);
+        panneau_couleurs.add(lbl_palette_couleurs1);
+
+        couleur1.setText("Rouge");
+        couleur1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                couleur1ActionPerformed(evt);
+            }
+        });
+        panneau_couleurs.add(couleur1);
+
+        couleur4.setText("Vert");
+        panneau_couleurs.add(couleur4);
+
+        couleur2.setText("Jaune");
+        panneau_couleurs.add(couleur2);
+
+        couleur5.setText("Bleu");
+        panneau_couleurs.add(couleur5);
+
+        couleur3.setText("Orange");
+        couleur3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                couleur3ActionPerformed(evt);
+            }
+        });
+        panneau_couleurs.add(couleur3);
+
+        couleur6.setText("Magenta");
+        couleur6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                couleur6ActionPerformed(evt);
+            }
+        });
+        panneau_couleurs.add(couleur6);
+
+        getContentPane().add(panneau_couleurs, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 360, 400, 280));
+
+        panneau_infos.setBackground(new java.awt.Color(153, 153, 153));
+
+        lbl_infos_partie.setText("Infos partie :");
+
+        javax.swing.GroupLayout panneau_infosLayout = new javax.swing.GroupLayout(panneau_infos);
+        panneau_infos.setLayout(panneau_infosLayout);
+        panneau_infosLayout.setHorizontalGroup(
+            panneau_infosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panneau_infosLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lbl_infos_partie)
+                .addContainerGap(314, Short.MAX_VALUE))
+        );
+        panneau_infosLayout.setVerticalGroup(
+            panneau_infosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panneau_infosLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lbl_infos_partie)
+                .addContainerGap(198, Short.MAX_VALUE))
+        );
+
+        getContentPane().add(panneau_infos, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 120, 400, 220));
+
         setBounds(0, 0, 1030, 693);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void couleur1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_couleur1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_couleur1ActionPerformed
+
+    private void couleur3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_couleur3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_couleur3ActionPerformed
+
+    private void couleur6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_couleur6ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_couleur6ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -68,5 +194,20 @@ public class fenetreDeJeu extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton couleur1;
+    private javax.swing.JButton couleur2;
+    private javax.swing.JButton couleur3;
+    private javax.swing.JButton couleur4;
+    private javax.swing.JButton couleur5;
+    private javax.swing.JButton couleur6;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel lbl_infos_partie;
+    private javax.swing.JLabel lbl_message;
+    private javax.swing.JLabel lbl_palette_couleurs;
+    private javax.swing.JLabel lbl_palette_couleurs1;
+    private javax.swing.JPanel panneau_couleurs;
+    private javax.swing.JPanel panneau_grille;
+    private javax.swing.JPanel panneau_infos;
+    private javax.swing.JPanel panneau_message;
     // End of variables declaration//GEN-END:variables
 }

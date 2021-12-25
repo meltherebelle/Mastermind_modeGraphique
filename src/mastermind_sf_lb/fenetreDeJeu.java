@@ -15,17 +15,17 @@ public class fenetreDeJeu extends javax.swing.JFrame {
      */
     public fenetreDeJeu() {
         initComponents();
-        
+
         panneau_grille.setVisible(false);
         panneau_infos.setVisible(false);
-        
-        for (int i = 0; i < 12; i--) {
-            for (int j = 0; j < 4; j--) {
+
+        for (int i = 0; i < 12; i--) { //12 lignes
+            for (int j = 0; j < 4; j--) { //4 colonnes
                 CelluleGraphique cellGraph = new CelluleGraphique();
                 panneau_grille.add(cellGraph);
             }
         }
-        
+
     }
 
     /**
@@ -38,54 +38,6 @@ public class fenetreDeJeu extends javax.swing.JFrame {
     private void initComponents() {
 
         panneau_grille = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
-        jButton7 = new javax.swing.JButton();
-        jButton8 = new javax.swing.JButton();
-        jButton9 = new javax.swing.JButton();
-        jButton10 = new javax.swing.JButton();
-        jButton11 = new javax.swing.JButton();
-        jButton12 = new javax.swing.JButton();
-        jButton13 = new javax.swing.JButton();
-        jButton14 = new javax.swing.JButton();
-        jButton15 = new javax.swing.JButton();
-        jButton16 = new javax.swing.JButton();
-        jButton17 = new javax.swing.JButton();
-        jButton18 = new javax.swing.JButton();
-        jButton19 = new javax.swing.JButton();
-        jButton20 = new javax.swing.JButton();
-        jButton21 = new javax.swing.JButton();
-        jButton22 = new javax.swing.JButton();
-        jButton23 = new javax.swing.JButton();
-        jButton24 = new javax.swing.JButton();
-        jButton25 = new javax.swing.JButton();
-        jButton26 = new javax.swing.JButton();
-        jButton27 = new javax.swing.JButton();
-        jButton28 = new javax.swing.JButton();
-        jButton29 = new javax.swing.JButton();
-        jButton30 = new javax.swing.JButton();
-        jButton31 = new javax.swing.JButton();
-        jButton32 = new javax.swing.JButton();
-        jButton33 = new javax.swing.JButton();
-        jButton34 = new javax.swing.JButton();
-        jButton35 = new javax.swing.JButton();
-        jButton36 = new javax.swing.JButton();
-        jButton37 = new javax.swing.JButton();
-        jButton38 = new javax.swing.JButton();
-        jButton39 = new javax.swing.JButton();
-        jButton40 = new javax.swing.JButton();
-        jButton41 = new javax.swing.JButton();
-        jButton42 = new javax.swing.JButton();
-        jButton43 = new javax.swing.JButton();
-        jButton44 = new javax.swing.JButton();
-        jButton45 = new javax.swing.JButton();
-        jButton46 = new javax.swing.JButton();
-        jButton47 = new javax.swing.JButton();
-        jButton48 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         panneau_message = new javax.swing.JPanel();
         lbl_message = new javax.swing.JLabel();
@@ -115,157 +67,7 @@ public class fenetreDeJeu extends javax.swing.JFrame {
 
         panneau_grille.setBackground(new java.awt.Color(204, 204, 204));
         panneau_grille.setLayout(new java.awt.GridLayout(12, 4));
-
-        jButton1.setText("jButton1");
-        panneau_grille.add(jButton1);
-
-        jButton2.setText("jButton2");
-        panneau_grille.add(jButton2);
-
-        jButton3.setText("jButton3");
-        panneau_grille.add(jButton3);
-
-        jButton4.setText("jButton4");
-        panneau_grille.add(jButton4);
-
-        jButton5.setText("jButton4");
-        panneau_grille.add(jButton5);
-
-        jButton6.setText("jButton4");
-        panneau_grille.add(jButton6);
-
-        jButton7.setText("jButton4");
-        panneau_grille.add(jButton7);
-
-        jButton8.setText("jButton4");
-        panneau_grille.add(jButton8);
-
-        jButton9.setText("jButton4");
-        panneau_grille.add(jButton9);
-
-        jButton10.setText("jButton4");
-        panneau_grille.add(jButton10);
-
-        jButton11.setText("jButton4");
-        panneau_grille.add(jButton11);
-
-        jButton12.setText("jButton4");
-        panneau_grille.add(jButton12);
-
-        jButton13.setText("jButton4");
-        panneau_grille.add(jButton13);
-
-        jButton14.setText("jButton4");
-        panneau_grille.add(jButton14);
-
-        jButton15.setText("jButton4");
-        panneau_grille.add(jButton15);
-
-        jButton16.setText("jButton4");
-        panneau_grille.add(jButton16);
-
-        jButton17.setText("jButton4");
-        panneau_grille.add(jButton17);
-
-        jButton18.setText("jButton4");
-        panneau_grille.add(jButton18);
-
-        jButton19.setText("jButton4");
-        panneau_grille.add(jButton19);
-
-        jButton20.setText("jButton4");
-        panneau_grille.add(jButton20);
-
-        jButton21.setText("jButton4");
-        panneau_grille.add(jButton21);
-
-        jButton22.setText("jButton4");
-        panneau_grille.add(jButton22);
-
-        jButton23.setText("jButton4");
-        panneau_grille.add(jButton23);
-
-        jButton24.setText("jButton4");
-        panneau_grille.add(jButton24);
-
-        jButton25.setText("jButton4");
-        panneau_grille.add(jButton25);
-
-        jButton26.setText("jButton4");
-        panneau_grille.add(jButton26);
-
-        jButton27.setText("jButton4");
-        panneau_grille.add(jButton27);
-
-        jButton28.setText("jButton4");
-        panneau_grille.add(jButton28);
-
-        jButton29.setText("jButton4");
-        panneau_grille.add(jButton29);
-
-        jButton30.setText("jButton4");
-        panneau_grille.add(jButton30);
-
-        jButton31.setText("jButton4");
-        panneau_grille.add(jButton31);
-
-        jButton32.setText("jButton4");
-        panneau_grille.add(jButton32);
-
-        jButton33.setText("jButton4");
-        panneau_grille.add(jButton33);
-
-        jButton34.setText("jButton4");
-        panneau_grille.add(jButton34);
-
-        jButton35.setText("jButton4");
-        panneau_grille.add(jButton35);
-
-        jButton36.setText("jButton4");
-        panneau_grille.add(jButton36);
-
-        jButton37.setText("jButton4");
-        panneau_grille.add(jButton37);
-
-        jButton38.setText("jButton4");
-        panneau_grille.add(jButton38);
-
-        jButton39.setText("jButton4");
-        panneau_grille.add(jButton39);
-
-        jButton40.setText("jButton4");
-        panneau_grille.add(jButton40);
-
-        jButton41.setText("jButton4");
-        panneau_grille.add(jButton41);
-
-        jButton42.setText("jButton4");
-        panneau_grille.add(jButton42);
-
-        jButton43.setText("jButton4");
-        panneau_grille.add(jButton43);
-
-        jButton44.setText("jButton4");
-        panneau_grille.add(jButton44);
-
-        jButton45.setText("jButton4");
-        panneau_grille.add(jButton45);
-
-        jButton46.setText("jButton4");
-        jButton46.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton46ActionPerformed(evt);
-            }
-        });
-        panneau_grille.add(jButton46);
-
-        jButton47.setText("jButton4");
-        panneau_grille.add(jButton47);
-
-        jButton48.setText("jButton4");
-        panneau_grille.add(jButton48);
-
-        getContentPane().add(panneau_grille, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 120, 550, 520));
+        getContentPane().add(panneau_grille, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, 580, 520));
 
         jLabel1.setFont(new java.awt.Font("American Typewriter", 0, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -398,10 +200,6 @@ public class fenetreDeJeu extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btn_magentaActionPerformed
 
-    private void jButton46ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton46ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton46ActionPerformed
-
     private void btn_demarrerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_demarrerActionPerformed
         panneau_grille.setVisible(true);
         panneau_infos.setVisible(true);
@@ -451,54 +249,6 @@ public class fenetreDeJeu extends javax.swing.JFrame {
     private javax.swing.JButton btn_orange;
     private javax.swing.JButton btn_rouge;
     private javax.swing.JButton btn_vert;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton10;
-    private javax.swing.JButton jButton11;
-    private javax.swing.JButton jButton12;
-    private javax.swing.JButton jButton13;
-    private javax.swing.JButton jButton14;
-    private javax.swing.JButton jButton15;
-    private javax.swing.JButton jButton16;
-    private javax.swing.JButton jButton17;
-    private javax.swing.JButton jButton18;
-    private javax.swing.JButton jButton19;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton20;
-    private javax.swing.JButton jButton21;
-    private javax.swing.JButton jButton22;
-    private javax.swing.JButton jButton23;
-    private javax.swing.JButton jButton24;
-    private javax.swing.JButton jButton25;
-    private javax.swing.JButton jButton26;
-    private javax.swing.JButton jButton27;
-    private javax.swing.JButton jButton28;
-    private javax.swing.JButton jButton29;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton30;
-    private javax.swing.JButton jButton31;
-    private javax.swing.JButton jButton32;
-    private javax.swing.JButton jButton33;
-    private javax.swing.JButton jButton34;
-    private javax.swing.JButton jButton35;
-    private javax.swing.JButton jButton36;
-    private javax.swing.JButton jButton37;
-    private javax.swing.JButton jButton38;
-    private javax.swing.JButton jButton39;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton40;
-    private javax.swing.JButton jButton41;
-    private javax.swing.JButton jButton42;
-    private javax.swing.JButton jButton43;
-    private javax.swing.JButton jButton44;
-    private javax.swing.JButton jButton45;
-    private javax.swing.JButton jButton46;
-    private javax.swing.JButton jButton47;
-    private javax.swing.JButton jButton48;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
-    private javax.swing.JButton jButton8;
-    private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;

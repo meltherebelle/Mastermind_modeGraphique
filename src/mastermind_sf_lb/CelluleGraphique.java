@@ -24,6 +24,7 @@ public class CelluleGraphique extends JButton {
 
     public CelluleGraphique(Cellule uneCellule) {
         celluleAssocie = uneCellule;
+        
     }
 
     //cette fonction permet de dessiner la cellule graphique
@@ -52,5 +53,3 @@ public class CelluleGraphique extends JButton {
 
 }
 
-    
-}

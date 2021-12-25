@@ -13,6 +13,6 @@ public class Cellule {
      
     // Constructeur : initialisant les attributs avec des valeurs par défaut
     public Cellule() {
-        
+        combCourante = null; //pas de comb courante
     }
 }

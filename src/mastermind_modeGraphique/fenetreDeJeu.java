@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package mastermind_sf_lb;
+package mastermind_modeGraphique;
 
 /**
  *
@@ -20,12 +20,12 @@ public class fenetreDeJeu extends javax.swing.JFrame {
         panneau_infos.setVisible(false);
 
        
-        for (int i = 0; i < 12; i--) { //12 lignes
-            for (int j = 0; j < 4; j--) { //4 colonnes
+        /*for (int i = 12; i >= 0; i--) { //12 lignes
+            for (int j = 0; j < 4; j++) { //4 colonnes
                 CelluleGraphique cellGraph = new CelluleGraphique();
                 panneau_grille.add(cellGraph);
             }
-        }
+        }*/
 
     }
 
@@ -220,6 +220,7 @@ public class fenetreDeJeu extends javax.swing.JFrame {
         panneau_grille.setVisible(true);
         panneau_infos.setVisible(true);
         btn_demarrer.setVisible(false);
+        debuterPartie();
     }//GEN-LAST:event_btn_demarrerActionPerformed
 
     private void btn_vertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_vertActionPerformed
@@ -263,7 +264,6 @@ public class fenetreDeJeu extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
-            @Override
             public void run() {
                 new fenetreDeJeu().setVisible(true);
             }
@@ -296,4 +296,5 @@ public class fenetreDeJeu extends javax.swing.JFrame {
     private javax.swing.JTextArea textarea_CoulOK;
     private javax.swing.JTextArea textarea_CoulPlacmtOK;
     // End of variables declaration//GEN-END:variables
+
 }

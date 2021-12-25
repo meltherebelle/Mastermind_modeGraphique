@@ -1,4 +1,4 @@
-package mastermind_sf_lb;
+package mastermind_modeGraphique;
 
 import java.awt.Graphics;
 import javax.swing.ImageIcon;
@@ -24,10 +24,9 @@ public class CelluleGraphique extends JButton {
     ImageIcon img_vert = new javax.swing.ImageIcon(getClass().getResource("/images/vert.png"));
     ImageIcon img_orange = new javax.swing.ImageIcon(getClass().getResource("/images/orange.png"));*/
 
-    /*public CelluleGraphique(Cellule uneCellule) {
+    public CelluleGraphique(Cellule uneCellule) {
         celluleAssocie = uneCellule;
-        
-    }*/
+    }
 
     //cette fonction permet de dessiner la cellule graphique
     /*@Override

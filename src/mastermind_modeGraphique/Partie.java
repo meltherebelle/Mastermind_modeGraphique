@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package mastermind_sf_lb;
+package mastermind_modeGraphique;
 
 import static java.util.Arrays.compare;
 import java.util.Scanner;

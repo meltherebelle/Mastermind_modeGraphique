@@ -19,6 +19,7 @@ public class fenetreDeJeu extends javax.swing.JFrame {
         panneau_grille.setVisible(false);
         panneau_infos.setVisible(false);
 
+       
         for (int i = 0; i < 12; i--) { //12 lignes
             for (int j = 0; j < 4; j--) { //4 colonnes
                 CelluleGraphique cellGraph = new CelluleGraphique();
@@ -124,12 +125,27 @@ public class fenetreDeJeu extends javax.swing.JFrame {
         panneau_couleurs.add(btn_rouge, new org.netbeans.lib.awtextra.AbsoluteConstraints(3, 71, 130, 100));
 
         btn_vert.setText("Vert");
+        btn_vert.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_vertActionPerformed(evt);
+            }
+        });
         panneau_couleurs.add(btn_vert, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 70, 140, 100));
 
         btn_jaune.setText("Jaune");
+        btn_jaune.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_jauneActionPerformed(evt);
+            }
+        });
         panneau_couleurs.add(btn_jaune, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 70, 133, 100));
 
         btn_bleu.setText("Bleu");
+        btn_bleu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_bleuActionPerformed(evt);
+            }
+        });
         panneau_couleurs.add(btn_bleu, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 173, 127, 101));
 
         btn_orange.setText("Orange");
@@ -206,6 +222,18 @@ public class fenetreDeJeu extends javax.swing.JFrame {
         btn_demarrer.setVisible(false);
     }//GEN-LAST:event_btn_demarrerActionPerformed
 
+    private void btn_vertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_vertActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_vertActionPerformed
+
+    private void btn_jauneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_jauneActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_jauneActionPerformed
+
+    private void btn_bleuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_bleuActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_bleuActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -235,6 +263,7 @@ public class fenetreDeJeu extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new fenetreDeJeu().setVisible(true);
             }

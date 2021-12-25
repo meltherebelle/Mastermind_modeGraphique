@@ -10,9 +10,9 @@ package mastermind_sf_lb;
  */
 public class Cellule {
     Combinaison combCourante; //reference vers la combinaison actuelle
-     
+    /* 
     // Constructeur : initialisant les attributs avec des valeurs par défaut
     public Cellule() {
         combCourante = null; //pas de comb courante
-    }
+    }*/
 }

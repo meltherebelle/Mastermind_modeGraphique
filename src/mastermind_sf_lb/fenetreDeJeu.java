@@ -15,6 +15,17 @@ public class fenetreDeJeu extends javax.swing.JFrame {
      */
     public fenetreDeJeu() {
         initComponents();
+        
+        panneau_grille.setVisible(false);
+        panneau_infos.setVisible(false);
+        
+        for (int i = 0; i < 12; i--) {
+            for (int j = 0; j < 4; j--) {
+                CelluleGraphique cellGraph = new CelluleGraphique();
+                panneau_grille.add(cellGraph);
+            }
+        }
+        
     }
 
     /**
@@ -97,6 +108,7 @@ public class fenetreDeJeu extends javax.swing.JFrame {
         lbl_nbCoulPlacmt = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         textarea_CoulPlacmtOK = new javax.swing.JTextArea();
+        btn_demarrer = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -275,10 +287,10 @@ public class fenetreDeJeu extends javax.swing.JFrame {
             .addGroup(panneau_messageLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(panneau_messageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 388, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1)
                     .addGroup(panneau_messageLayout.createSequentialGroup()
                         .addComponent(lbl_message)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 319, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         panneau_messageLayout.setVerticalGroup(
@@ -287,19 +299,19 @@ public class fenetreDeJeu extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(lbl_message)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
-        getContentPane().add(panneau_message, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 20, 400, 80));
+        getContentPane().add(panneau_message, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 20, 400, 150));
 
         panneau_couleurs.setBackground(new java.awt.Color(153, 153, 153));
-        panneau_couleurs.setLayout(new java.awt.GridLayout(4, 3));
+        panneau_couleurs.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lbl_palette_couleurs.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lbl_palette_couleurs.setText("Palette de couleurs :");
-        panneau_couleurs.add(lbl_palette_couleurs);
-        panneau_couleurs.add(lbl_palette_couleurs1);
+        lbl_palette_couleurs.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        lbl_palette_couleurs.setText("   Palette de couleurs :");
+        panneau_couleurs.add(lbl_palette_couleurs, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 200, 70));
+        panneau_couleurs.add(lbl_palette_couleurs1, new org.netbeans.lib.awtextra.AbsoluteConstraints(345, 0, 133, 70));
 
         btn_rouge.setText("Rouge");
         btn_rouge.addActionListener(new java.awt.event.ActionListener() {
@@ -307,16 +319,16 @@ public class fenetreDeJeu extends javax.swing.JFrame {
                 btn_rougeActionPerformed(evt);
             }
         });
-        panneau_couleurs.add(btn_rouge);
+        panneau_couleurs.add(btn_rouge, new org.netbeans.lib.awtextra.AbsoluteConstraints(3, 71, 130, 100));
 
         btn_vert.setText("Vert");
-        panneau_couleurs.add(btn_vert);
+        panneau_couleurs.add(btn_vert, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 70, 140, 100));
 
         btn_jaune.setText("Jaune");
-        panneau_couleurs.add(btn_jaune);
+        panneau_couleurs.add(btn_jaune, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 70, 133, 100));
 
         btn_bleu.setText("Bleu");
-        panneau_couleurs.add(btn_bleu);
+        panneau_couleurs.add(btn_bleu, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 173, 127, 101));
 
         btn_orange.setText("Orange");
         btn_orange.addActionListener(new java.awt.event.ActionListener() {
@@ -324,7 +336,7 @@ public class fenetreDeJeu extends javax.swing.JFrame {
                 btn_orangeActionPerformed(evt);
             }
         });
-        panneau_couleurs.add(btn_orange);
+        panneau_couleurs.add(btn_orange, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 170, 127, 107));
 
         btn_magenta.setText("Magenta");
         btn_magenta.addActionListener(new java.awt.event.ActionListener() {
@@ -332,7 +344,7 @@ public class fenetreDeJeu extends javax.swing.JFrame {
                 btn_magentaActionPerformed(evt);
             }
         });
-        panneau_couleurs.add(btn_magenta);
+        panneau_couleurs.add(btn_magenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 170, 130, 107));
 
         getContentPane().add(panneau_couleurs, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 360, 400, 280));
 
@@ -343,25 +355,33 @@ public class fenetreDeJeu extends javax.swing.JFrame {
         panneau_infos.add(lbl_infos_partie, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 200, 73));
 
         lbl_nbCoul.setText("nombre de bonnes couleurs :");
-        panneau_infos.add(lbl_nbCoul, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 73, 200, 73));
+        panneau_infos.add(lbl_nbCoul, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, 200, 73));
 
         textarea_CoulOK.setColumns(2);
         textarea_CoulOK.setRows(1);
         textarea_CoulOK.setTabSize(1);
         jScrollPane2.setViewportView(textarea_CoulOK);
 
-        panneau_infos.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 73, 200, 73));
+        panneau_infos.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 60, 110, 50));
 
         lbl_nbCoulPlacmt.setText("nombre de couleurs bien placées :");
-        panneau_infos.add(lbl_nbCoulPlacmt, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 146, 200, 73));
+        panneau_infos.add(lbl_nbCoulPlacmt, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, 230, 73));
 
         textarea_CoulPlacmtOK.setColumns(2);
         textarea_CoulPlacmtOK.setRows(1);
         jScrollPane3.setViewportView(textarea_CoulPlacmtOK);
 
-        panneau_infos.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 146, 200, 73));
+        panneau_infos.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 120, 110, 50));
 
-        getContentPane().add(panneau_infos, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 120, 400, 220));
+        getContentPane().add(panneau_infos, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 170, 400, 190));
+
+        btn_demarrer.setText("Démarrer partie");
+        btn_demarrer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_demarrerActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btn_demarrer, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 40, 130, 40));
 
         setBounds(0, 0, 1030, 693);
     }// </editor-fold>//GEN-END:initComponents
@@ -381,6 +401,12 @@ public class fenetreDeJeu extends javax.swing.JFrame {
     private void jButton46ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton46ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton46ActionPerformed
+
+    private void btn_demarrerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_demarrerActionPerformed
+        panneau_grille.setVisible(true);
+        panneau_infos.setVisible(true);
+        btn_demarrer.setVisible(false);
+    }//GEN-LAST:event_btn_demarrerActionPerformed
 
     /**
      * @param args the command line arguments
@@ -419,6 +445,7 @@ public class fenetreDeJeu extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_bleu;
+    private javax.swing.JButton btn_demarrer;
     private javax.swing.JButton btn_jaune;
     private javax.swing.JButton btn_magenta;
     private javax.swing.JButton btn_orange;

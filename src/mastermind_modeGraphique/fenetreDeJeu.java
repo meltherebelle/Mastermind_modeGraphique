@@ -20,19 +20,22 @@ public class fenetreDeJeu extends javax.swing.JFrame {
 
         panneau_grille.setVisible(false);
         panneau_infos.setVisible(false);
+        
 
         //creation d'une matrice 12 x 4 contenant des cellules Graphiques
         CelluleGraphique grilleCouleurs[][] = new CelluleGraphique[12][4];
         
-        for (int line = 12; line > 0; line--) {
+        for (int line = 11; line >= 0; line--) {
             for (int column = 0; column < 4; column++) {
                 String color = "vide"; //on initialise les cellules Graphiques sans couleur
                 CelluleGraphique cellGraph = new CelluleGraphique(color);
+                grilleCouleurs[line][column] = cellGraph ; //stockes chaque référence a la cellulegraphique dans le tableau grilleCouleurs
                 //cellGraph = grilleCouleurs[line][column]; //on stocke chaque référence
                 panneau_grille.add(cellGraph);
             }
         }
     }
+    
     
     
     /*public int Options() {
@@ -69,10 +72,14 @@ public class fenetreDeJeu extends javax.swing.JFrame {
         int nbCoups = 10; //pour l'instant
         
         for (int i = 0; i < nbCoups; i++) {
+            
+            zone_mess.setText("saissisez votre combinaison de 4 couleurs en cliquant ci dessous");
+            
             int coupsRestant = nbCoups;
+            
             coupsRestant--;
             //zone_mess.setText("Vous disposez de "+coupsRestant+" coups. ");
-            System.out.println("Vous disposez de "+coupsRestant+" coups. ");
+            //System.out.println("Vous disposez de "+coupsRestant+" coups. ");
             
             //nouvelle comb choisie
             Combinaison cc = new Combinaison();
@@ -306,16 +313,20 @@ public class fenetreDeJeu extends javax.swing.JFrame {
 
     private void btn_rougeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_rougeActionPerformed
         // TODO add your handling code here:
+        zone_mess.setText("Vous avez clique sur le bouton rouge");
+        //affecterCouleurGrille()
         //des que le bouton rouge est cliqué on assimile la couleur rouge à la cellule de la comb
-        cellGraph.affecterCouleur("rouge");
+        //cellGraph.affecterCouleur("rouge");
     }//GEN-LAST:event_btn_rougeActionPerformed
 
     private void btn_orangeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_orangeActionPerformed
         // TODO add your handling code here:
+        zone_mess.setText("Vous avez clique sur le bouton orange");
     }//GEN-LAST:event_btn_orangeActionPerformed
 
     private void btn_magentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_magentaActionPerformed
         // TODO add your handling code here:
+        zone_mess.setText("Vous avez clique sur le bouton magenta");
     }//GEN-LAST:event_btn_magentaActionPerformed
 
     private void btn_demarrerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_demarrerActionPerformed
@@ -328,16 +339,22 @@ public class fenetreDeJeu extends javax.swing.JFrame {
 
     private void btn_vertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_vertActionPerformed
         // TODO add your handling code here:
+        zone_mess.setText("Vous avez clique sur le bouton vert");
     }//GEN-LAST:event_btn_vertActionPerformed
 
     private void btn_jauneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_jauneActionPerformed
         // TODO add your handling code here:
+        zone_mess.setText("Vous avez clique sur le bouton jaune");
     }//GEN-LAST:event_btn_jauneActionPerformed
 
     private void btn_bleuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_bleuActionPerformed
         // TODO add your handling code here:
+        zone_mess.setText("Vous avez clique sur le bouton bleu");
     }//GEN-LAST:event_btn_bleuActionPerformed
 
+    //public void affecterCouleurGrille(int a,int b){
+      //  grilleCouleurs[a][b].
+    //}
     /**
      * @param args the command line arguments
      */

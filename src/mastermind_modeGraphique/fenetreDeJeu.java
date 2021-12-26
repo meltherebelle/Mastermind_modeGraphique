@@ -4,6 +4,8 @@
  */
 package mastermind_modeGraphique;
 
+import java.util.Arrays;
+
 /**
  *
  * @author leaburriat
@@ -56,12 +58,13 @@ public class fenetreDeJeu extends javax.swing.JFrame {
     
     public void debuterPartie() {
         
-        //afficher mess
+        zone_mess.setText("Bienvenue dans le MasterMind de Scotty & Lélé :\nUne combinaison secrète a été tirée.\nVeuillez choisir une combinaison de couleurs\nen cliquant sur la palette ci-dessous ;)");
         
-        //System.out.println("Bienvenue dans le MasterMind de Scotty & Lélé :) ");
         //on génère une combinaison secrete
         Combinaison cs = new Combinaison();
         cs.combinaisonSecrete();
+        String[] combSecret = cs.combinaisonSecrete(); //on recup la combS dans une variable pour ensuite l'afficher
+        lbl_combSecrete.setText("La combinaison secrete tirée est : "+ Arrays.toString(combSecret));
         
         //int nbCoups = Options(); //choix difficulté du niveau
         //int nbCoups = 12; //pour l'instant
@@ -111,7 +114,7 @@ public class fenetreDeJeu extends javax.swing.JFrame {
         panneau_message = new javax.swing.JPanel();
         lbl_message = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        zone_mess = new javax.swing.JTextArea();
         panneau_couleurs = new javax.swing.JPanel();
         lbl_palette_couleurs = new javax.swing.JLabel();
         lbl_palette_couleurs1 = new javax.swing.JLabel();
@@ -130,8 +133,9 @@ public class fenetreDeJeu extends javax.swing.JFrame {
         jScrollPane3 = new javax.swing.JScrollPane();
         textarea_CoulPlacmtOK = new javax.swing.JTextArea();
         btn_demarrer = new javax.swing.JButton();
-        jPanel1 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
+        panneau_combSecrete = new javax.swing.JPanel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        lbl_combSecrete = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -149,9 +153,9 @@ public class fenetreDeJeu extends javax.swing.JFrame {
 
         lbl_message.setText("Messages :");
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(3);
-        jScrollPane1.setViewportView(jTextArea1);
+        zone_mess.setColumns(20);
+        zone_mess.setRows(3);
+        jScrollPane1.setViewportView(zone_mess);
 
         javax.swing.GroupLayout panneau_messageLayout = new javax.swing.GroupLayout(panneau_message);
         panneau_message.setLayout(panneau_messageLayout);
@@ -271,29 +275,31 @@ public class fenetreDeJeu extends javax.swing.JFrame {
         });
         getContentPane().add(btn_demarrer, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 20, 130, 40));
 
-        jPanel1.setBackground(new java.awt.Color(153, 204, 255));
-        jPanel1.setForeground(new java.awt.Color(153, 204, 255));
+        panneau_combSecrete.setBackground(new java.awt.Color(153, 204, 255));
+        panneau_combSecrete.setForeground(new java.awt.Color(153, 204, 255));
 
-        jLabel2.setText("Secret Combo qu'on affichera ici une fois découverte");
+        lbl_combSecrete.setColumns(20);
+        lbl_combSecrete.setRows(5);
+        jScrollPane4.setViewportView(lbl_combSecrete);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel2)
-                .addContainerGap(242, Short.MAX_VALUE))
+        javax.swing.GroupLayout panneau_combSecreteLayout = new javax.swing.GroupLayout(panneau_combSecrete);
+        panneau_combSecrete.setLayout(panneau_combSecreteLayout);
+        panneau_combSecreteLayout.setHorizontalGroup(
+            panneau_combSecreteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panneau_combSecreteLayout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 538, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(22, Short.MAX_VALUE))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel2)
-                .addContainerGap(38, Short.MAX_VALUE))
+        panneau_combSecreteLayout.setVerticalGroup(
+            panneau_combSecreteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panneau_combSecreteLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 580, 60));
+        getContentPane().add(panneau_combSecrete, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 580, 60));
 
         setBounds(0, 0, 1030, 693);
     }// </editor-fold>//GEN-END:initComponents
@@ -313,10 +319,9 @@ public class fenetreDeJeu extends javax.swing.JFrame {
     private void btn_demarrerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_demarrerActionPerformed
         panneau_grille.setVisible(true);
         panneau_infos.setVisible(true);
-        btn_demarrer.setVisible(false);
-        /*Partie partie = new Partie();
-        partie.debuterPartie();*/
         debuterPartie();
+        panneau_grille.repaint(); //on vide la grille pour commencer une nouvelle partie
+        btn_demarrer.setVisible(false);
     }//GEN-LAST:event_btn_demarrerActionPerformed
 
     private void btn_vertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_vertActionPerformed
@@ -375,24 +380,25 @@ public class fenetreDeJeu extends javax.swing.JFrame {
     private javax.swing.JButton btn_rouge;
     private javax.swing.JButton btn_vert;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JTextArea lbl_combSecrete;
     private javax.swing.JLabel lbl_infos_partie;
     private javax.swing.JLabel lbl_message;
     private javax.swing.JLabel lbl_nbCoul;
     private javax.swing.JLabel lbl_nbCoulPlacmt;
     private javax.swing.JLabel lbl_palette_couleurs;
     private javax.swing.JLabel lbl_palette_couleurs1;
+    private javax.swing.JPanel panneau_combSecrete;
     private javax.swing.JPanel panneau_couleurs;
     private javax.swing.JPanel panneau_grille;
     private javax.swing.JPanel panneau_infos;
     private javax.swing.JPanel panneau_message;
     private javax.swing.JTextArea textarea_CoulOK;
     private javax.swing.JTextArea textarea_CoulPlacmtOK;
+    private javax.swing.JTextArea zone_mess;
     // End of variables declaration//GEN-END:variables
 
 }

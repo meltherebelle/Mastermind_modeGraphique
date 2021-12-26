@@ -36,6 +36,7 @@ public class Combinaison {
         for (int i = 0; i < 4; i++) {
             int c = rand.nextInt(5);
             combSecret[i] = TabCouleur[c];
+            //on devra aussi trouver un moyen d'--> affecterCouleur(TabCouleur[c]); à la cellule graphique
         }
 
         System.out.println("La combinaison secrète tirée aléatoirement est : " + Arrays.toString(combSecret));

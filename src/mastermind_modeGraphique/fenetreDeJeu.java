@@ -62,37 +62,37 @@ public class fenetreDeJeu extends javax.swing.JFrame {
         
         //on génère une combinaison secrete
         Combinaison cs = new Combinaison();
-        cs.combinaisonSecrete();
         String[] combSecret = cs.combinaisonSecrete(); //on recup la combS dans une variable pour ensuite l'afficher
         lbl_combSecrete.setText("La combinaison secrete tirée est : "+ Arrays.toString(combSecret));
         
         //int nbCoups = Options(); //choix difficulté du niveau
-        //int nbCoups = 12; //pour l'instant
+        int nbCoups = 10; //pour l'instant
         
         for (int i = 0; i < nbCoups; i++) {
             int coupsRestant = nbCoups;
             coupsRestant--;
-            //afficher mess
+            //zone_mess.setText("Vous disposez de "+coupsRestant+" coups. ");
+            System.out.println("Vous disposez de "+coupsRestant+" coups. ");
             
-            //System.out.println("Vous disposez de "+coupsRestant+" coups. ");
+            //nouvelle comb choisie
             Combinaison cc = new Combinaison();
             cc.combinaisonChoisie(); //demande une combinaison au player
             
+            //on détermine les nb coul & coul + placement OK
             Combinaison compare = new Combinaison();
             int[] nbok = compare.Comparaison(cs.combSecret, cc.combChoisie); //.Comparaison(Combinaison[] combS , Combinaison[] combC);
             
+            //on verifie si c'est une combinaison gagnante
             Combinaison etregagnant = new Combinaison();
             boolean gagner = etregagnant.Gagner(nbok);
             
             if (gagner == true) {
-                //afficher mess
-                
-                //System.out.println("Vous avez deviné le code secret !!! ");
+                //zone_mess.setText("Vous avez deviné le code secret !!! ");
+                System.out.println("Vous avez deviné le code secret !!! ");
             }
             else {
-                //afficher mess
-                
-                //System.out.println("Retentez votre chance");
+                //zone_mess.setText("Retentez votre chance");
+                System.out.println("Retentez votre chance");
             }
            
         }
@@ -306,6 +306,8 @@ public class fenetreDeJeu extends javax.swing.JFrame {
 
     private void btn_rougeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_rougeActionPerformed
         // TODO add your handling code here:
+        //des que le bouton rouge est cliqué on assimile la couleur rouge à la cellule de la comb
+        cellGraph.affecterCouleur("rouge");
     }//GEN-LAST:event_btn_rougeActionPerformed
 
     private void btn_orangeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_orangeActionPerformed
@@ -317,11 +319,11 @@ public class fenetreDeJeu extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_magentaActionPerformed
 
     private void btn_demarrerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_demarrerActionPerformed
+        panneau_grille.repaint(); //on vide la grille pour commencer une nouvelle partie
         panneau_grille.setVisible(true);
         panneau_infos.setVisible(true);
-        debuterPartie();
-        panneau_grille.repaint(); //on vide la grille pour commencer une nouvelle partie
         btn_demarrer.setVisible(false);
+        debuterPartie();
     }//GEN-LAST:event_btn_demarrerActionPerformed
 
     private void btn_vertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_vertActionPerformed

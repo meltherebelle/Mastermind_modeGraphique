@@ -54,8 +54,8 @@ public class Combinaison {
         TabCouleur[4] = "Orange";
         TabCouleur[5] = "Magenta";
 
-     
-        Scanner sc = new Scanner(System.in);
+        //on prend la couleur cliquée par le joueur sur la palette
+        //Scanner sc = new Scanner(System.in);
         System.out.println("Entrez un numéro pour choisir une combinaison de couleur :\n0. Rouge\n1. Jaune\n2. Vert \n3. Bleu\n4. Orange\n5. Magenta");
         for (int i = 0; i < 4; i++) {
             int num = i + 1;

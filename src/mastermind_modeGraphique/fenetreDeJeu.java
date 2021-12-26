@@ -19,15 +19,102 @@ public class fenetreDeJeu extends javax.swing.JFrame {
         panneau_grille.setVisible(false);
         panneau_infos.setVisible(false);
 
-       
+        //creation d'une matrice 12 x 4 contenant des cellules Graphiques
+        CelluleGraphique grilleCouleurs[][] = new CelluleGraphique[12][4];
+        
+        for (int line = 12; line > 0; line--) {
+            for (int column = 0; column < 4; column++) {
+                String color = "vide"; //on initialise les cellules Graphiques sans couleur
+                CelluleGraphique cellGraph = new CelluleGraphique(color);
+                //cellGraph = grilleCouleurs[line][column]; //on stocke chaque référence
+                panneau_grille.add(cellGraph);
+            }
+        }
+        
+        
+       /*
+        CelluleGraphique cellGraph = new CelluleGraphique();
+                //grilleCouleurs[line][column] = cellGraph;
+                cellGraph = grilleCouleurs[line][column];
+                panneau_grille.add(cellGraph);
+        */
+        
+        
         /*for (int i = 12; i >= 0; i--) { //12 lignes
             for (int j = 0; j < 4; j++) { //4 colonnes
                 CelluleGraphique cellGraph = new CelluleGraphique();
                 panneau_grille.add(cellGraph);
             }
         }*/
+        
+        
 
     }
+    
+    
+    /*public int Options() {
+        int coups = 0;
+        //afficher mess
+        
+        //System.out.println("Choisissez un mode :\n1. Niveau facile\n2. Niveau moyen \n3. Niveau difficile");
+        
+        //creer 3 boutons de niveau difficulté à la place du scanner
+        //Scanner sc = new Scanner(System.in);
+        int choixniveau = sc.nextInt();
+        if (choixniveau == 1) {
+            coups = 12;//partie de base (facile)
+        }
+        else if (choixniveau == 2) {
+            coups = 9; //partie niveau moyen
+        }
+        else if (choixniveau == 3) {
+            coups = 5; //partie niveau difficile
+        }
+        return coups;
+    }*/
+    
+    public void debuterPartie() {
+        
+        //afficher mess
+        
+        //System.out.println("Bienvenue dans le MasterMind de Scotty & Lélé :) ");
+        //on génère une combinaison secrete
+        Combinaison cs = new Combinaison();
+        cs.combinaisonSecrete();
+        
+        //int nbCoups = Options(); //choix difficulté du niveau
+        //int nbCoups = 12; //pour l'instant
+        
+        for (int i = 0; i < nbCoups; i++) {
+            int coupsRestant = nbCoups;
+            coupsRestant--;
+            //afficher mess
+            
+            //System.out.println("Vous disposez de "+coupsRestant+" coups. ");
+            Combinaison cc = new Combinaison();
+            cc.combinaisonChoisie(); //demande une combinaison au player
+            
+            Combinaison compare = new Combinaison();
+            int[] nbok = compare.Comparaison(cs.combSecret, cc.combChoisie); //.Comparaison(Combinaison[] combS , Combinaison[] combC);
+            
+            Combinaison etregagnant = new Combinaison();
+            boolean gagner = etregagnant.Gagner(nbok);
+            
+            if (gagner == true) {
+                //afficher mess
+                
+                //System.out.println("Vous avez deviné le code secret !!! ");
+            }
+            else {
+                //afficher mess
+                
+                //System.out.println("Retentez votre chance");
+            }
+           
+        }
+        
+    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -62,18 +149,20 @@ public class fenetreDeJeu extends javax.swing.JFrame {
         jScrollPane3 = new javax.swing.JScrollPane();
         textarea_CoulPlacmtOK = new javax.swing.JTextArea();
         btn_demarrer = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         panneau_grille.setBackground(new java.awt.Color(204, 204, 204));
         panneau_grille.setLayout(new java.awt.GridLayout(12, 4));
-        getContentPane().add(panneau_grille, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, 580, 520));
+        getContentPane().add(panneau_grille, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, 580, 500));
 
         jLabel1.setFont(new java.awt.Font("American Typewriter", 0, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("MasterMind");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 550, 80));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 550, 30));
 
         panneau_message.setBackground(new java.awt.Color(153, 153, 153));
 
@@ -199,7 +288,31 @@ public class fenetreDeJeu extends javax.swing.JFrame {
                 btn_demarrerActionPerformed(evt);
             }
         });
-        getContentPane().add(btn_demarrer, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 40, 130, 40));
+        getContentPane().add(btn_demarrer, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 20, 130, 40));
+
+        jPanel1.setBackground(new java.awt.Color(153, 204, 255));
+        jPanel1.setForeground(new java.awt.Color(153, 204, 255));
+
+        jLabel2.setText("Secret Combo qu'on affichera ici une fois découverte");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel2)
+                .addContainerGap(242, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel2)
+                .addContainerGap(38, Short.MAX_VALUE))
+        );
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 580, 60));
 
         setBounds(0, 0, 1030, 693);
     }// </editor-fold>//GEN-END:initComponents
@@ -220,6 +333,8 @@ public class fenetreDeJeu extends javax.swing.JFrame {
         panneau_grille.setVisible(true);
         panneau_infos.setVisible(true);
         btn_demarrer.setVisible(false);
+        /*Partie partie = new Partie();
+        partie.debuterPartie();*/
         debuterPartie();
     }//GEN-LAST:event_btn_demarrerActionPerformed
 
@@ -279,6 +394,8 @@ public class fenetreDeJeu extends javax.swing.JFrame {
     private javax.swing.JButton btn_rouge;
     private javax.swing.JButton btn_vert;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;

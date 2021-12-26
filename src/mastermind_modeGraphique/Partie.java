@@ -31,7 +31,7 @@ public class Partie {
         return coups;
     }
     
-    public void debuterPartie() {
+    /*public void debuterPartie() {
         
         System.out.println("Bienvenue dans le MasterMind de Scotty & Lélé :) ");
         //on génère une combinaison secrete
@@ -62,6 +62,6 @@ public class Partie {
            
         }
         
-    }
+    }*/
     
 }

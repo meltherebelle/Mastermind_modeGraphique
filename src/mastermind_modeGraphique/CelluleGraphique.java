@@ -13,9 +13,10 @@ import javax.swing.JButton;
  *
  * @author leaburriat
  */
+
+//extension avec des propriétés graphiques - héritage de JButton
 public class CelluleGraphique extends JButton {
     
-    Cellule celluleAssocie;
     //télécharger image blanche=vide --> //ImageIcon img_vide = new javax.swing.ImageIcon(getClass().getResource("/images/vide.png"));
     /*ImageIcon img_bleu = new javax.swing.ImageIcon(getClass().getResource("/images/bleu.png"));
     ImageIcon img_jaune = new javax.swing.ImageIcon(getClass().getResource("/images/jaune.png"));
@@ -24,8 +25,15 @@ public class CelluleGraphique extends JButton {
     ImageIcon img_vert = new javax.swing.ImageIcon(getClass().getResource("/images/vert.png"));
     ImageIcon img_orange = new javax.swing.ImageIcon(getClass().getResource("/images/orange.png"));*/
 
-    public CelluleGraphique(Cellule uneCellule) {
-        celluleAssocie = uneCellule;
+    public CelluleGraphique(String couleur) {
+        //on affecte la couleur à la cellule
+        affecterCouleur(couleur);
+    }
+    
+    //permet de changer la couleur de cellule graphique
+    public void affecterCouleur(String couleur) {
+        String colorToAffect = couleur;
+        
     }
 
     //cette fonction permet de dessiner la cellule graphique

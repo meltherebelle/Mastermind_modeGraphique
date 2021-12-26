@@ -60,7 +60,7 @@ public class Combinaison {
             int num = i + 1;
             System.out.println("choix de la couleur n° " + num + ": ");
             int choixmenu = sc.nextInt();
-            combChoisie[i] = TabCouleur[choixmenu]; //A CONTINUER
+            combChoisie[i] = TabCouleur[choixmenu];
         }
         System.out.println("La combinaison choisie est : " + Arrays.toString(combChoisie));
 

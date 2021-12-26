@@ -17,13 +17,14 @@ import javax.swing.JButton;
 //extension avec des propriétés graphiques - héritage de JButton
 public class CelluleGraphique extends JButton {
     
-    //télécharger image blanche=vide --> //ImageIcon img_vide = new javax.swing.ImageIcon(getClass().getResource("/images/vide.png"));
-    /*ImageIcon img_bleu = new javax.swing.ImageIcon(getClass().getResource("/images/bleu.png"));
+    //toutes les couleurs de combinaisons pour nos cellules graphiques
+    ImageIcon img_vide = new javax.swing.ImageIcon(getClass().getResource("/images/vide.png"));
+    ImageIcon img_bleu = new javax.swing.ImageIcon(getClass().getResource("/images/bleu.png"));
     ImageIcon img_jaune = new javax.swing.ImageIcon(getClass().getResource("/images/jaune.png"));
     ImageIcon img_rouge = new javax.swing.ImageIcon(getClass().getResource("/images/rouge.png"));
     ImageIcon img_magenta = new javax.swing.ImageIcon(getClass().getResource("/images/magenta.png"));
     ImageIcon img_vert = new javax.swing.ImageIcon(getClass().getResource("/images/vert.png"));
-    ImageIcon img_orange = new javax.swing.ImageIcon(getClass().getResource("/images/orange.png"));*/
+    ImageIcon img_orange = new javax.swing.ImageIcon(getClass().getResource("/images/orange.png"));
 
     public CelluleGraphique(String couleur) {
         //on affecte la couleur à la cellule
@@ -37,28 +38,13 @@ public class CelluleGraphique extends JButton {
     }
 
     //cette fonction permet de dessiner la cellule graphique
-    /*@Override
+    @Override
     public void paintComponent(Graphics G) {
         super.paintComponent(G);
-        if (CelluleAssocie.presenceTrouNoir() == true) {
-            setIcon(img_trouNoir);
-        } else if (CelluleAssocie.presenceDesintegrateur() == true) {
-            setIcon(img_desint);
-        } else {
-            String couleur_jeton = CelluleAssocie.lireCouleurDuJeton();
-            switch (couleur_jeton) {
-                case "vide":
-                    setIcon(img_vide);
-                    break;
-                case "Rouge":
-                    setIcon(img_jetonRouge);
-                    break;
-                case "Jaune":
-                    setIcon(img_jetonJaune);
-                    break;
-            }
-        }
-    }*/
+        setIcon(img_vide); //on itiliase la couleur de nos cellules comme étant vides
+        //donc des qu'on aura une comb choisie faudra updater la couleur des cellules de la ligne corresp.
+        
+    }
 
 }
 

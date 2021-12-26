@@ -30,25 +30,6 @@ public class fenetreDeJeu extends javax.swing.JFrame {
                 panneau_grille.add(cellGraph);
             }
         }
-        
-        
-       /*
-        CelluleGraphique cellGraph = new CelluleGraphique();
-                //grilleCouleurs[line][column] = cellGraph;
-                cellGraph = grilleCouleurs[line][column];
-                panneau_grille.add(cellGraph);
-        */
-        
-        
-        /*for (int i = 12; i >= 0; i--) { //12 lignes
-            for (int j = 0; j < 4; j++) { //4 colonnes
-                CelluleGraphique cellGraph = new CelluleGraphique();
-                panneau_grille.add(cellGraph);
-            }
-        }*/
-        
-        
-
     }
     
     

@@ -73,7 +73,7 @@ public class fenetreDeJeu extends javax.swing.JFrame {
         
         for (int i = 0; i < nbCoups; i++) {
             
-            zone_mess.setText("saissisez votre combinaison de 4 couleurs en cliquant ci dessous");
+            zone_mess.setText(zone_mess.getText()+"\nSaissisez votre combinaison de 4 couleurs en cliquant ci dessous");
             
             int coupsRestant = nbCoups;
             
@@ -314,7 +314,8 @@ public class fenetreDeJeu extends javax.swing.JFrame {
     private void btn_rougeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_rougeActionPerformed
         // TODO add your handling code here:
         zone_mess.setText("Vous avez clique sur le bouton rouge");
-        //affecterCouleurGrille()
+        
+        
         //des que le bouton rouge est cliqué on assimile la couleur rouge à la cellule de la comb
         //cellGraph.affecterCouleur("rouge");
     }//GEN-LAST:event_btn_rougeActionPerformed

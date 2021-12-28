@@ -6,12 +6,14 @@ package mastermind_modeGraphique;
 
 import java.util.Arrays;
 import javax.swing.ImageIcon;
-
+import java.awt.event.ActionListener;
+import javax.swing.JLabel;
+import javax.swing.JButton;
 /**
  *
  * @author 
  */
-public class fenetreDeJeu extends javax.swing.JFrame {
+public class fenetreDeJeu extends javax.swing.JFrame  {
 
     /**
      * Creates new form fenetreDeJeu
@@ -35,7 +37,7 @@ public class fenetreDeJeu extends javax.swing.JFrame {
                 //cellGraph = grilleCouleurs[line][column]; //on stocke chaque référence
                 panneau_grille.add(cellGraph);
             }
-        }
+        }     
     }
     
     
@@ -61,6 +63,7 @@ public class fenetreDeJeu extends javax.swing.JFrame {
         return coups;
     }*/
     
+ 
     public void debuterPartie() {
         
         
@@ -321,14 +324,18 @@ public class fenetreDeJeu extends javax.swing.JFrame {
         setBounds(0, 0, 1030, 693);
     }// </editor-fold>//GEN-END:initComponents
 
+
     private void btn_rougeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_rougeActionPerformed
         // TODO add your handling code here:
+        
+
         zone_mess.setText("Vous avez clique sur le bouton rouge");
         
-        //int x; //creation des attributs lors de la creation de bouton --> mettre en lien avec les tour de boucle i,j
+        //int x;  //creation des attributs lors de la creation de bouton --> mettre en lien avec les tour de boucle i,j
         //int y;
         //grilleCouleurs[][].affecterCouleur(img_rouge);
-        grilleCouleurs[1][1].;
+        grilleCouleurs[1][1].affecterCouleur("rouge");
+       
         //des que le bouton rouge est cliqué on assimile la couleur rouge à la cellule de la comb
         //cellGraph.affecterCouleur("rouge");
     }//GEN-LAST:event_btn_rougeActionPerformed
@@ -336,7 +343,7 @@ public class fenetreDeJeu extends javax.swing.JFrame {
     private void btn_orangeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_orangeActionPerformed
         // TODO add your handling code here:
         zone_mess.setText("Vous avez clique sur le bouton orange");
-        
+              
     }//GEN-LAST:event_btn_orangeActionPerformed
 
     private void btn_magentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_magentaActionPerformed

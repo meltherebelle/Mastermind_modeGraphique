@@ -3,6 +3,7 @@ package mastermind_modeGraphique;
 import java.awt.Graphics;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JPanel;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -34,7 +35,7 @@ public class CelluleGraphique extends JButton {
     //permet de changer la couleur de cellule graphique
     public void affecterCouleur(String couleur) {
         String colorToAffect = couleur;
-        
+               
     }
 
     //cette fonction permet de dessiner la cellule graphique
@@ -42,6 +43,7 @@ public class CelluleGraphique extends JButton {
     public void paintComponent(Graphics G) {
         super.paintComponent(G);
         setIcon(img_vide); //on itiliase la couleur de nos cellules comme étant vides
+        //if() ca clic sur bouton rouge --> setIcon(img_rouge)
         //donc des qu'on aura une comb choisie faudra updater la couleur des cellules de la ligne corresp.
         
     }

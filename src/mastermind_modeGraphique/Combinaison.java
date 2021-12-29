@@ -65,10 +65,10 @@ public class Combinaison {
             //int choixmenu = sc.nextInt();
             //combChoisie[i] = TabCouleur[choixmenu];
             
-            combChoisie[i] = //clique couleur palette
-            
+            //combChoisie[i] = //clique couleur palette
             
         }
+        
         System.out.println("La combinaison choisie est : " + Arrays.toString(combChoisie));
 
         return combChoisie;

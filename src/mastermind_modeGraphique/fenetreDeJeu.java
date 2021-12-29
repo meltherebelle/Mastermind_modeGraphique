@@ -5,16 +5,20 @@
 package mastermind_modeGraphique;
 
 import java.util.Arrays;
-
+import javax.swing.ImageIcon;
+import java.awt.event.ActionListener;
+import javax.swing.JLabel;
+import javax.swing.JButton;
 /**
  *
- * @author leaburriat
+ * @author 
  */
-public class fenetreDeJeu extends javax.swing.JFrame {
+public class fenetreDeJeu extends javax.swing.JFrame  {
 
     /**
      * Creates new form fenetreDeJeu
      */
+    CelluleGraphique grilleCouleurs[][] = new CelluleGraphique[12][4];
     public fenetreDeJeu() {
         initComponents();
 
@@ -22,7 +26,7 @@ public class fenetreDeJeu extends javax.swing.JFrame {
         panneau_infos.setVisible(false);
         
         //creation d'une matrice 12 x 4 contenant des cellules Graphiques
-        CelluleGraphique grilleCouleurs[][] = new CelluleGraphique[12][4];
+        
         
         for (int line = 11; line >= 0; line--) {
             for (int column = 0; column < 4; column++) {
@@ -32,7 +36,7 @@ public class fenetreDeJeu extends javax.swing.JFrame {
                 //cellGraph = grilleCouleurs[line][column]; //on stocke chaque référence
                 panneau_grille.add(cellGraph);
             }
-        }
+        }     
     }
     
     
@@ -57,7 +61,10 @@ public class fenetreDeJeu extends javax.swing.JFrame {
         return coups;
     }*/
     
+ 
     public void debuterPartie() {
+        
+        
         
         zone_mess.setText("Bienvenue dans le MasterMind de Scotty & Lélé :\nUne combinaison secrète a été tirée.\nVeuillez choisir une combinaison de couleurs\nen cliquant sur la palette ci-dessous ;)");
         
@@ -195,6 +202,7 @@ public class fenetreDeJeu extends javax.swing.JFrame {
         panneau_couleurs.add(lbl_palette_couleurs, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 200, 70));
         panneau_couleurs.add(lbl_palette_couleurs1, new org.netbeans.lib.awtextra.AbsoluteConstraints(345, 0, 133, 70));
 
+        btn_rouge.setBackground(new java.awt.Color(255, 0, 0));
         btn_rouge.setText("Rouge");
         btn_rouge.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -203,6 +211,7 @@ public class fenetreDeJeu extends javax.swing.JFrame {
         });
         panneau_couleurs.add(btn_rouge, new org.netbeans.lib.awtextra.AbsoluteConstraints(3, 71, 130, 100));
 
+        btn_vert.setBackground(new java.awt.Color(0, 255, 102));
         btn_vert.setText("Vert");
         btn_vert.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -211,6 +220,7 @@ public class fenetreDeJeu extends javax.swing.JFrame {
         });
         panneau_couleurs.add(btn_vert, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 70, 140, 100));
 
+        btn_jaune.setBackground(new java.awt.Color(255, 255, 0));
         btn_jaune.setText("Jaune");
         btn_jaune.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -219,6 +229,7 @@ public class fenetreDeJeu extends javax.swing.JFrame {
         });
         panneau_couleurs.add(btn_jaune, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 70, 133, 100));
 
+        btn_bleu.setBackground(new java.awt.Color(0, 51, 255));
         btn_bleu.setText("Bleu");
         btn_bleu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -227,6 +238,7 @@ public class fenetreDeJeu extends javax.swing.JFrame {
         });
         panneau_couleurs.add(btn_bleu, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 173, 127, 101));
 
+        btn_orange.setBackground(new java.awt.Color(255, 153, 0));
         btn_orange.setText("Orange");
         btn_orange.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -235,6 +247,7 @@ public class fenetreDeJeu extends javax.swing.JFrame {
         });
         panneau_couleurs.add(btn_orange, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 170, 127, 107));
 
+        btn_magenta.setBackground(new java.awt.Color(255, 0, 204));
         btn_magenta.setText("Magenta");
         btn_magenta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -309,15 +322,26 @@ public class fenetreDeJeu extends javax.swing.JFrame {
         setBounds(0, 0, 1030, 693);
     }// </editor-fold>//GEN-END:initComponents
 
+
     private void btn_rougeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_rougeActionPerformed
         // TODO add your handling code here:
+        
+
         zone_mess.setText("Vous avez clique sur le bouton rouge");
+        
+        //int x;  //creation des attributs lors de la creation de bouton --> mettre en lien avec les tour de boucle i,j
+        //int y;
+        //grilleCouleurs[][].affecterCouleur(img_rouge);
+        grilleCouleurs[1][1].affecterCouleur("rouge");
+       
+        //des que le bouton rouge est cliqué on assimile la couleur rouge à la cellule de la comb
         //cellGraph.affecterCouleur("rouge");
     }//GEN-LAST:event_btn_rougeActionPerformed
 
     private void btn_orangeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_orangeActionPerformed
         // TODO add your handling code here:
         zone_mess.setText("Vous avez clique sur le bouton orange");
+              
     }//GEN-LAST:event_btn_orangeActionPerformed
 
     private void btn_magentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_magentaActionPerformed
@@ -349,7 +373,7 @@ public class fenetreDeJeu extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_bleuActionPerformed
 
     //public void affecterCouleurGrille(int a,int b){
-      //  grilleCouleurs[a][b].
+        //grilleCouleurs[a][b].
     //}
     /**
      * @param args the command line arguments

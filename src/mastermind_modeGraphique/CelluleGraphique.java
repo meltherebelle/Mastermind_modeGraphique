@@ -3,6 +3,7 @@ package mastermind_modeGraphique;
 import java.awt.Graphics;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JPanel;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license

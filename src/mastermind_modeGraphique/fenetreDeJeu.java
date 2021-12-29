@@ -4,6 +4,7 @@
  */
 package mastermind_modeGraphique;
 
+import java.awt.Color;
 import java.util.Arrays;
 import javax.swing.ImageIcon;
 import java.awt.event.ActionListener;
@@ -28,12 +29,12 @@ public class fenetreDeJeu extends javax.swing.JFrame  {
         //creation d'une matrice 12 x 4 contenant des cellules Graphiques
         
         
-        for (int line = 11; line >= 0; line--) {
+        for (int line = 0; line <12; line++) {
             for (int column = 0; column < 4; column++) {
                 String color = "vide"; //on initialise les cellules Graphiques sans couleur
                 CelluleGraphique cellGraph = new CelluleGraphique(line, column, color);
                 grilleCouleurs[line][column] = cellGraph; //stockes chaque référence a la cellulegraphique dans le tableau grilleCouleurs
-                
+                cellGraph.affecterCouleur(color);
                 panneau_grille.add(cellGraph);
             }
         }     
@@ -326,21 +327,22 @@ public class fenetreDeJeu extends javax.swing.JFrame  {
     private void btn_rougeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_rougeActionPerformed
         // TODO add your handling code here:
         zone_mess.setText("Vous avez clique sur le bouton rouge");
-        
-        //grilleCouleurs[1][1].affecterCouleur("rouge"); //test d'affectation couleur rouge à la cellule[1][1]
-        
-        //des que le bouton rouge est cliqué on assimile la couleur rouge à la cellule de la comb
+        //test d'affectation couleur rouge à la cellule[1][1] (soit 2eme ligne 2eme colonne)
+        //grilleCouleurs[1][1].setBackground(Color.red);
+        //comment faire l'affectation / récupération de la ligne et col à colorier --> creer méthode ? avec parametres (int x, int y)
     }//GEN-LAST:event_btn_rougeActionPerformed
 
     private void btn_orangeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_orangeActionPerformed
         // TODO add your handling code here:
         zone_mess.setText("Vous avez clique sur le bouton orange");
-              
+        
+        //grilleCouleurs[1][1].setBackground(Color.orange);
     }//GEN-LAST:event_btn_orangeActionPerformed
 
     private void btn_magentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_magentaActionPerformed
         // TODO add your handling code here:
         zone_mess.setText("Vous avez clique sur le bouton magenta");
+        //grilleCouleurs[1][1].setBackground(Color.pink);
     }//GEN-LAST:event_btn_magentaActionPerformed
 
     private void btn_demarrerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_demarrerActionPerformed
@@ -354,16 +356,19 @@ public class fenetreDeJeu extends javax.swing.JFrame  {
     private void btn_vertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_vertActionPerformed
         // TODO add your handling code here:
         zone_mess.setText("Vous avez clique sur le bouton vert");
+        //grilleCouleurs[1][1].setBackground(Color.green);
     }//GEN-LAST:event_btn_vertActionPerformed
 
     private void btn_jauneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_jauneActionPerformed
         // TODO add your handling code here:
         zone_mess.setText("Vous avez clique sur le bouton jaune");
+        //grilleCouleurs[1][1].setBackground(Color.yellow);
     }//GEN-LAST:event_btn_jauneActionPerformed
 
     private void btn_bleuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_bleuActionPerformed
         // TODO add your handling code here:
         zone_mess.setText("Vous avez clique sur le bouton bleu");
+        //grilleCouleurs[1][1].setBackground(Color.blue);
     }//GEN-LAST:event_btn_bleuActionPerformed
 
     //public void affecterCouleurGrille(int a,int b){

@@ -43,16 +43,16 @@ public class CelluleGraphique extends JButton {
     @Override
     public void paintComponent(Graphics G) {
         super.paintComponent(G);
-        setIcon(img_vide); //on initialise la couleur de nos cellules comme étant vides
-        //on recupere la couleur choisie à etre affecter à la cellule graphique
-        /*String couleurChoisie = affecterCouleur("rouge");
-        switch (couleurChoisie) {
+        setIcon(img_vide); //on initialise la grille en cases vides = blanc
+        //String color = //il faut récupérer la couleur cliquée dans cette variable pour ensuite faire des switch case
+        
+        /*
+        switch (color) {
             case "rouge" :
                 setIcon(img_rouge);
                 break;
         }*/
-        CelluleGraphique cellG = new CelluleGraphique(1, 1, "rouge");
-        cellG.setIcon(img_rouge);
+        
     }
 }
 

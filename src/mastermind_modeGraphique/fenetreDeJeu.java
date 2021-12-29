@@ -33,7 +33,7 @@ public class fenetreDeJeu extends javax.swing.JFrame  {
                 String color = "vide"; //on initialise les cellules Graphiques sans couleur
                 CelluleGraphique cellGraph = new CelluleGraphique(line, column, color);
                 grilleCouleurs[line][column] = cellGraph; //stockes chaque référence a la cellulegraphique dans le tableau grilleCouleurs
-                //cellGraph = grilleCouleurs[line][column]; //on stocke chaque référence
+                
                 panneau_grille.add(cellGraph);
             }
         }     
@@ -325,17 +325,11 @@ public class fenetreDeJeu extends javax.swing.JFrame  {
 
     private void btn_rougeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_rougeActionPerformed
         // TODO add your handling code here:
-        
-
         zone_mess.setText("Vous avez clique sur le bouton rouge");
         
-        //int x;  //creation des attributs lors de la creation de bouton --> mettre en lien avec les tour de boucle i,j
-        //int y;
-        //grilleCouleurs[][].affecterCouleur(img_rouge);
-        grilleCouleurs[1][1].affecterCouleur("rouge");
-       
+        //grilleCouleurs[1][1].affecterCouleur("rouge"); //test d'affectation couleur rouge à la cellule[1][1]
+        
         //des que le bouton rouge est cliqué on assimile la couleur rouge à la cellule de la comb
-        //cellGraph.affecterCouleur("rouge");
     }//GEN-LAST:event_btn_rougeActionPerformed
 
     private void btn_orangeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_orangeActionPerformed

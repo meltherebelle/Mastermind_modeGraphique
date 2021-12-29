@@ -1,5 +1,6 @@
 package mastermind_modeGraphique;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -50,6 +51,8 @@ public class CelluleGraphique extends JButton {
                 setIcon(img_rouge);
                 break;
         }*/
+        CelluleGraphique cellG = new CelluleGraphique(1, 1, "rouge");
+        cellG.setIcon(img_rouge);
     }
 }
 

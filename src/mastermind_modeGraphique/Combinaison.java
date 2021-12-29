@@ -55,13 +55,19 @@ public class Combinaison {
         TabCouleur[5] = "Magenta";
 
         //on prend la couleur cliquée par le joueur sur la palette
-        //Scanner sc = new Scanner(System.in);
+        
         System.out.println("Entrez un numéro pour choisir une combinaison de couleur :\n0. Rouge\n1. Jaune\n2. Vert \n3. Bleu\n4. Orange\n5. Magenta");
         for (int i = 0; i < 4; i++) {
             int num = i + 1;
             System.out.println("choix de la couleur n° " + num + ": ");
-            int choixmenu = sc.nextInt();
-            combChoisie[i] = TabCouleur[choixmenu];
+            
+            //GOAL : réadapter la section ci-dessous en graphique
+            //int choixmenu = sc.nextInt();
+            //combChoisie[i] = TabCouleur[choixmenu];
+            
+            combChoisie[i] = //clique couleur palette
+            
+            
         }
         System.out.println("La combinaison choisie est : " + Arrays.toString(combChoisie));
 

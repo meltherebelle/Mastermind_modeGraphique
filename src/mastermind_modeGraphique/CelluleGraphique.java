@@ -26,25 +26,30 @@ public class CelluleGraphique extends JButton {
     ImageIcon img_vert = new javax.swing.ImageIcon(getClass().getResource("/images/vert.png"));
     ImageIcon img_orange = new javax.swing.ImageIcon(getClass().getResource("/images/orange.png"));
 
-    public CelluleGraphique(String couleur) {
+    public CelluleGraphique(int x, int y, String couleur) {
         //on affecte la couleur à la cellule
         affecterCouleur(couleur);
     }
     
     //permet de changer la couleur de cellule graphique
-    public void affecterCouleur(String couleur) {
+    public String affecterCouleur(String couleur) {
         String colorToAffect = couleur;
-        
+        return couleur;
     }
 
     //cette fonction permet de dessiner la cellule graphique
     @Override
     public void paintComponent(Graphics G) {
         super.paintComponent(G);
-        setIcon(img_vide); //on itiliase la couleur de nos cellules comme étant vides
-        //donc des qu'on aura une comb choisie faudra updater la couleur des cellules de la ligne corresp.
-        
+        setIcon(img_vide); //on initialise la couleur de nos cellules comme étant vides
+        //on recupere la couleur choisie à etre affecter à la cellule graphique
+        /*String couleurChoisie = affecterCouleur("rouge");
+        switch (couleurChoisie) {
+            case "rouge" :
+                setIcon(img_rouge);
+                break;
+        }*/
     }
-
 }
+
 

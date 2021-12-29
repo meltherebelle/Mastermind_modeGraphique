@@ -21,21 +21,19 @@ public class fenetreDeJeu extends javax.swing.JFrame {
         panneau_grille.setVisible(false);
         panneau_infos.setVisible(false);
         
-
         //creation d'une matrice 12 x 4 contenant des cellules Graphiques
         CelluleGraphique grilleCouleurs[][] = new CelluleGraphique[12][4];
         
         for (int line = 11; line >= 0; line--) {
             for (int column = 0; column < 4; column++) {
                 String color = "vide"; //on initialise les cellules Graphiques sans couleur
-                CelluleGraphique cellGraph = new CelluleGraphique(color);
-                grilleCouleurs[line][column] = cellGraph ; //stockes chaque référence a la cellulegraphique dans le tableau grilleCouleurs
+                CelluleGraphique cellGraph = new CelluleGraphique(line, column, color);
+                grilleCouleurs[line][column] = cellGraph; //stockes chaque référence a la cellulegraphique dans le tableau grilleCouleurs
                 //cellGraph = grilleCouleurs[line][column]; //on stocke chaque référence
                 panneau_grille.add(cellGraph);
             }
         }
     }
-    
     
     
     /*public int Options() {
@@ -314,9 +312,6 @@ public class fenetreDeJeu extends javax.swing.JFrame {
     private void btn_rougeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_rougeActionPerformed
         // TODO add your handling code here:
         zone_mess.setText("Vous avez clique sur le bouton rouge");
-        
-        
-        //des que le bouton rouge est cliqué on assimile la couleur rouge à la cellule de la comb
         //cellGraph.affecterCouleur("rouge");
     }//GEN-LAST:event_btn_rougeActionPerformed
 

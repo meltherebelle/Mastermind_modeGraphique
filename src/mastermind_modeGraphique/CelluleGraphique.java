@@ -19,6 +19,11 @@ import javax.swing.JPanel;
 //extension avec des propriétés graphiques - héritage de JButton
 public class CelluleGraphique extends JButton {
     
+    //on met un attribut couleur
+    String colorToAffect = "vide";
+    int cx;
+    int cy;
+    
     //toutes les couleurs de combinaisons pour nos cellules graphiques
     ImageIcon img_vide = new javax.swing.ImageIcon(getClass().getResource("/images/vide.png"));
     ImageIcon img_bleu = new javax.swing.ImageIcon(getClass().getResource("/images/bleu.png"));
@@ -29,13 +34,15 @@ public class CelluleGraphique extends JButton {
     ImageIcon img_orange = new javax.swing.ImageIcon(getClass().getResource("/images/orange.png"));
 
     public CelluleGraphique(int x, int y, String couleur) {
+        this.cx=x;
+        this.cy=y;
         //on affecte la couleur à la cellule
         affecterCouleur(couleur);
     }
     
     //permet de changer la couleur de cellule graphique
     public String affecterCouleur(String couleur) {
-        String colorToAffect = couleur;
+        colorToAffect = couleur; //colorToAffect doit etre un attribu, non pas une variable locale
         return couleur;
     }
 
@@ -46,12 +53,26 @@ public class CelluleGraphique extends JButton {
         setIcon(img_vide); //on initialise la grille en cases vides = blanc
         //String color = //il faut récupérer la couleur cliquée dans cette variable pour ensuite faire des switch case
         
-        /*
-        switch (color) {
+        switch (colorToAffect) {
             case "rouge" :
                 setIcon(img_rouge);
                 break;
-        }*/
+            case "bleu" :
+                setIcon(img_bleu);
+                break;
+            case "jaune" :
+                setIcon(img_jaune);
+                break;
+            case "vert" :
+                setIcon(img_vert);
+                break;
+            case "magenta" :
+                setIcon(img_magenta);
+                break;
+            case "orange" :
+                setIcon(img_orange);
+                break; 
+        }
         
     }
 }

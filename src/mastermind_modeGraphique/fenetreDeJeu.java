@@ -5,6 +5,7 @@
 package mastermind_modeGraphique;
 
 import java.awt.Color;
+import java.awt.event.ActionEvent;
 import java.util.Arrays;
 import javax.swing.ImageIcon;
 import java.awt.event.ActionListener;
@@ -36,8 +37,16 @@ public class fenetreDeJeu extends javax.swing.JFrame  {
                 grilleCouleurs[line][column] = cellGraph; //stockes chaque référence a la cellulegraphique dans le tableau grilleCouleurs
                 cellGraph.affecterCouleur(color);
                 panneau_grille.add(cellGraph);
+                //ajout du code qui permet de trouver le bouto cliqué et d'affecter la couleur corresp.
+                cellGraph.addActionListener(new java.awt.event.ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        cellGraph.affecterCouleur("rouge");
+                        System.out.println("Vous avez cliqué sur le bouton de coordonnées "+cellGraph);
+                    }
+                });
             }
-        }     
+        }
     }
     
     
@@ -328,8 +337,10 @@ public class fenetreDeJeu extends javax.swing.JFrame  {
         // TODO add your handling code here:
         zone_mess.setText("Vous avez clique sur le bouton rouge");
         //test d'affectation couleur rouge à la cellule[1][1] (soit 2eme ligne 2eme colonne)
-        //grilleCouleurs[1][1].setBackground(Color.red);
-        //comment faire l'affectation / récupération de la ligne et col à colorier --> creer méthode ? avec parametres (int x, int y)
+        grilleCouleurs[1][1].affecterCouleur("rouge");
+        repaint();
+        //comment faire l'affectation / récupération de la ligne et col à colorier
+        //stocker un x et un y global qui dit l'endroit du jeu où on en est
     }//GEN-LAST:event_btn_rougeActionPerformed
 
     private void btn_orangeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_orangeActionPerformed

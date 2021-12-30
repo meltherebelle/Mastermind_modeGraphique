@@ -74,18 +74,19 @@ public class fenetreDeJeu extends javax.swing.JFrame  {
     }*/
     
     
- 
+ public
+            String combSecret[] = new String[4];
     public void debuterPartie() {
-        
-        
+
         
         zone_mess.setText("Bienvenue dans le MasterMind de Scotty & Lélé :\nUne combinaison secrète a été tirée.\nVeuillez choisir une combinaison de couleurs\nen cliquant sur la palette ci-dessous ;)");
         
         //on génère une combinaison secrete
-        Combinaison cs = new Combinaison();
-        String[] combSecret = cs.combinaisonSecrete(); //on recup la combS dans une variable pour ensuite l'afficher
-        lbl_combSecrete.setText("La combinaison secrete tirée est : "+ Arrays.toString(combSecret));
+        //Combinaison cs = new Combinaison();
+        //String[] combSecret = cs.combinaisonSecrete(); //on recup la combS dans une variable pour ensuite l'afficher
+        //lbl_combSecrete.setText("La combinaison secrete tirée est : "+ Arrays.toString(combSecret));
         
+        /* !!!!!
         //int nbCoups = Options(); //choix difficulté du niveau
         int nbCoups = 10; //pour l'instant
         
@@ -120,103 +121,12 @@ public class fenetreDeJeu extends javax.swing.JFrame  {
                 System.out.println("Retentez votre chance");
             }
            
-        }
+        }*/
+         
         
     }
     
-   /* public class Combinaison {
     
-    public
-            String combSecret[] = new String[4];
-    public
-            String combChoisie[] = new String[4];
-    
-    public String[] combinaisonSecrete() {
-
-        //creation tableau contenant les 6 couleurs possibles
-        String TabCouleur[] = new String[6];
-        TabCouleur[0] = "Rouge";
-        TabCouleur[1] = "Jaune";
-        TabCouleur[2] = "Vert";
-        TabCouleur[3] = "Bleu";
-        TabCouleur[4] = "Orange";
-        TabCouleur[5] = "Magenta";
-
-        //tirage aléatoire des couleurs contenues dans le code
-        Random rand = new Random();
-        for (int i = 0; i < 4; i++) {
-            int c = rand.nextInt(5);
-            combSecret[i] = TabCouleur[c];
-            //on devra aussi trouver un moyen d'--> affecterCouleur(TabCouleur[c]); à la cellule graphique
-        }
-
-        //System.out.println("La combinaison secrète tirée aléatoirement est : " + Arrays.toString(combSecret));
-        return combSecret;
-    }
-    public int[] Comparaison(String[] combS, String[] combC) {
-
-        int nbCoul_OK = 0;
-        int nbCoul_PlacmtOK = 0;
-        //permet de checker le placement & couleur
-        boolean[] BoolC = new boolean [4];
-        boolean[] BoolS = new boolean [4];
-        
-        //comparaison des couleurs + placement
-        for (int i = 0; i < 4 ; i++) {
-            //on regarde d'abord si les deux tableaux ne sont pas déjà checké
-            if ( (BoolC[i] != true) && (BoolS[i] != true) ) {
-                //si il ne sont pas encore checké on compare la combC et combS
-                if (combS[i].equals(combC[i])) {
-                    //on check les tableaux de booleans
-                    BoolC[i] = true;
-                    BoolS[i] = true;
-                    nbCoul_PlacmtOK += 1;
-                }
-            }  
-        }
-        
-        //si pas checké on regarde si la couleur choisie de la case que l'on regarde est identique à une des couleurs du secret / sinon on ne vérifie pas
-        //comparaison des couleurs
-        for (int i = 0; i < 4; i ++) {
-            //on regarde si bolC n'est pas déjà checké
-            if ( (BoolC[i] != true) && (BoolC[i] != true) ) {
-                //si pas encore checké on regarde si la couleur[i] de combC correspond à une des couleurs de combS
-                for (int j = 0; j < 4; j++) {
-                    if (combC[i].equals(combS[j])) {
-                        //on check le tableau des booleans
-                        BoolC[i] = true;
-                        BoolS[i] = true;
-                        nbCoul_OK += 1;
-                        break;
-                    }
-                }
-            }
-        }
-       
-        int [] NB_OK = new int[2];
-        NB_OK[0] = nbCoul_OK;
-        NB_OK[1] = nbCoul_PlacmtOK;
-        int[] arrayNB_OK = new int[] {nbCoul_OK, nbCoul_PlacmtOK};
-        //System.out.println("nb de couleurs OK : "+arrayNB_OK[0] + ", nb de coul+placement OK : "+ arrayNB_OK[1]);
-        return NB_OK;
-    }
-    
-    textarea_CoulOK.setText("nb de bonne couleurs: "+NB_OK[0]);
-    textarea_CoulPlacmtOK.setText("nn de bon placement"+NB_OK[1]);
-    
-    public boolean Gagner(int [] nbOK) {
-        //on veut récuperer le NB_OK de comparaison et l'affecter à nb_ok local
-        int [] NB_OK = nbOK;
-        //ensuite on compare si nb_ok dis qu'il y a un gagnant ou pas
-        if ( (NB_OK[0] == 0) && (NB_OK[1] == 4) ) {
-            System.out.println("nb ok gagnant");
-            return true; //le code est deviné !
-        }
-        else {
-            System.out.println("nb ok pas gagnant");
-            return false;
-        }
-    } */
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -377,7 +287,7 @@ public class fenetreDeJeu extends javax.swing.JFrame  {
         textarea_CoulOK.setTabSize(1);
         jScrollPane2.setViewportView(textarea_CoulOK);
 
-        panneau_infos.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 60, 110, 50));
+        panneau_infos.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 60, 140, 50));
 
         lbl_nbCoulPlacmt.setText("nombre de couleurs bien placées :");
         panneau_infos.add(lbl_nbCoulPlacmt, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, 230, 73));
@@ -386,7 +296,7 @@ public class fenetreDeJeu extends javax.swing.JFrame  {
         textarea_CoulPlacmtOK.setRows(1);
         jScrollPane3.setViewportView(textarea_CoulPlacmtOK);
 
-        panneau_infos.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 120, 110, 50));
+        panneau_infos.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 120, 140, 50));
 
         getContentPane().add(panneau_infos, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 170, 400, 190));
 
@@ -428,18 +338,132 @@ public class fenetreDeJeu extends javax.swing.JFrame  {
     }// </editor-fold>//GEN-END:initComponents
     int X = -1; // en lien avec le nb de click pour colorier a la suite dans l'orde les cases
     int Y = -1;
+    
+    public
+            String combChoisie[] = new String[4];
+    
+    /*public String[] combinaisonSecrete() {
+
+        //creation tableau contenant les 6 couleurs possibles
+        String TabCouleur[] = new String[6];
+        TabCouleur[0] = "Rouge";
+        TabCouleur[1] = "Jaune";
+        TabCouleur[2] = "Vert";
+        TabCouleur[3] = "Bleu";
+        TabCouleur[4] = "Orange";
+        TabCouleur[5] = "Magenta";
+
+        //tirage aléatoire des couleurs contenues dans le code
+        Random rand = new Random();
+        for (int i = 0; i < 4; i++) {
+            int c = rand.nextInt(5);
+            combSecret[i] = TabCouleur[c];
+            //on devra aussi trouver un moyen d'--> affecterCouleur(TabCouleur[c]); à la cellule graphique
+        }
+        return combSecret;
+    } */
+    int cpt = 0;
+    int cptCmbC = -1;
+    public void Jeu(){
+            cptCmbC = 0;
+            Combinaison cs = new Combinaison();
+            String[] combSecret = cs.combinaisonSecrete(); //on recup la combS dans une variable pour ensuite l'afficher
+            lbl_combSecrete.setText("La combinaison secrete tirée est : "+ Arrays.toString(combSecret));
+        //while(cpt%4 == 0){ // fais l'action tout les 4 clics
+        if(cpt%4==0){ //fais l'action tout les 4 clics
+            //on détermine les nb coul & coul + placement OK
+            Combinaison compare = new Combinaison();
+            
+            
+            int[] nbok = compare.Comparaison(combSecret, combChoisie);
+            
+            //Test affichage coparaisons
+            textarea_CoulOK.setText("nb bonne couleurs: "+ nbok[0]);
+            textarea_CoulPlacmtOK.setText("nb bon placement"+ nbok[1]);
+            
+            //on verifie si c'est une combinaison gagnante
+            Combinaison etregagnant = new Combinaison();         
+            boolean gagner = etregagnant.Gagner(nbok);
+            
+            if (gagner == true) {
+                zone_mess.setText("Vous avez deviné le code secret !!! ");
+                
+            }
+            else {
+                zone_mess.setText("Retentez votre chance");
+                
+            }
+            
+        }
+        
+    }
+    
+    /*int [] NB_OK = new int[2];
+    public int[] Comparaison(String[] combS, String[] combC) {
+
+        int nbCoul_OK = 0;
+        int nbCoul_PlacmtOK = 0;
+        //permet de checker le placement & couleur
+        boolean[] BoolC = new boolean [4];
+        boolean[] BoolS = new boolean [4];
+        
+        //comparaison des couleurs + placement
+        for (int i = 0; i < 4 ; i++) {
+            //on regarde d'abord si les deux tableaux ne sont pas déjà checké
+            if ( (BoolC[i] != true) && (BoolS[i] != true) ) {
+                //si il ne sont pas encore checké on compare la combC et combS
+                if (combS[i].equals(combC[i])) {
+                    //on check les tableaux de booleans
+                    BoolC[i] = true;
+                    BoolS[i] = true;
+                    nbCoul_PlacmtOK += 1;
+                }
+            }  
+        }
+        
+        //si pas checké on regarde si la couleur choisie de la case que l'on regarde est identique à une des couleurs du secret / sinon on ne vérifie pas
+        //comparaison des couleurs
+        for (int i = 0; i < 4; i ++) {
+            //on regarde si bolC n'est pas déjà checké
+            if ( (BoolC[i] != true) && (BoolC[i] != true) ) {
+                //si pas encore checké on regarde si la couleur[i] de combC correspond à une des couleurs de combS
+                for (int j = 0; j < 4; j++) {
+                    if (combC[i].equals(combS[j])) {
+                        //on check le tableau des booleans
+                        BoolC[i] = true;
+                        BoolS[i] = true;
+                        nbCoul_OK += 1;
+                        break;
+                    }
+                }
+            }
+        }
+       
+        //int [] NB_OK = new int[2];
+        NB_OK[0] = nbCoul_OK;
+        NB_OK[1] = nbCoul_PlacmtOK;
+        //int[] arrayNB_OK = new int[] {nbCoul_OK, nbCoul_PlacmtOK};
+        //System.out.println("nb de couleurs OK : "+arrayNB_OK[0] + ", nb de coul+placement OK : "+ arrayNB_OK[1]);
+        return NB_OK;
+    }
+    */
 
     private void btn_rougeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_rougeActionPerformed
         // TODO add your handling code here:
+        cpt += 1; //nb de clic +1 pour Jeu()
+        cptCmbC +=1; // compteur pour chaque cellule de combChoisie
         X += 1;
         Y += 1;
         X = X/4; //division entiere pour nb ligne
         Y = Y%4; // modulo pour nb colonne
-        zone_mess.setText("Vous avez clique sur le bouton rouge");
-        //test d'affectation couleur rouge à la cellule[1][1] (soit 2eme ligne 2eme colonne)
+        zone_mess.setText("Y"+Y+"X"+X); // Y n'augmente pas ???
+       
+        //zone_mess.setText("Vous avez clique sur le bouton rouge");
+        
         grilleCouleurs[X][Y].affecterCouleur("rouge");
         repaint();
-        combChoisie[Y]="rouge"; // rentre rouge dans colonne pour ensuite comparer
+        combChoisie[cptCmbC]="rouge"; // rentre rouge dans colonne pour ensuite comparer
+        //zone_mess.setText(combChoisie[1]);// la couleur se mets bien
         
         //comment faire l'affectation / récupération de la ligne et col à colorier
         //stocker un x et un y global qui dit l'endroit du jeu où on en est
@@ -448,13 +472,18 @@ public class fenetreDeJeu extends javax.swing.JFrame  {
     private void btn_orangeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_orangeActionPerformed
         // TODO add your handling code here:
         zone_mess.setText("Vous avez clique sur le bouton orange");
-        grilleCouleurs[1][2].affecterCouleur("orange");
+        //grilleCouleurs[1][2].affecterCouleur("orange");
         //grilleCouleurs[1][1].setBackground(Color.orange);
+        Jeu();
     }//GEN-LAST:event_btn_orangeActionPerformed
 
     private void btn_magentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_magentaActionPerformed
         // TODO add your handling code here:
         zone_mess.setText("Vous avez clique sur le bouton magenta");
+        //TEST POUR COMPARER LES COMBINAISONS
+        //Comparaison(combSecret,combChoisie); // test si ca compare
+        //textarea_CoulOK.setText("nb de bonne couleurs: "+NB_OK[0]);
+        //textarea_CoulPlacmtOK.setText("nn de bon placement"+NB_OK[1]);
         //grilleCouleurs[1][1].setBackground(Color.pink);
     }//GEN-LAST:event_btn_magentaActionPerformed
 
@@ -469,6 +498,7 @@ public class fenetreDeJeu extends javax.swing.JFrame  {
     private void btn_vertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_vertActionPerformed
         // TODO add your handling code here:
         zone_mess.setText("Vous avez clique sur le bouton vert");
+        
         //grilleCouleurs[1][1].setBackground(Color.green);
     }//GEN-LAST:event_btn_vertActionPerformed
 

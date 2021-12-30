@@ -37,13 +37,14 @@ public class fenetreDeJeu extends javax.swing.JFrame  {
                 grilleCouleurs[line][column] = cellGraph; //stockes chaque référence a la cellulegraphique dans le tableau grilleCouleurs
                 cellGraph.affecterCouleur(color);
                 panneau_grille.add(cellGraph);
-                //ajout du code qui permet de trouver le bouto cliqué et d'affecter la couleur corresp.
+                //ajout du code qui permet de trouver le bouton cliqué et d'affecter la couleur corresp.
                 cellGraph.addActionListener(new java.awt.event.ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         cellGraph.affecterCouleur("rouge");
                         System.out.println("Vous avez cliqué sur le bouton de coordonnées "+cellGraph);
                     }
+                    
                 });
             }
         }
@@ -70,6 +71,7 @@ public class fenetreDeJeu extends javax.swing.JFrame  {
         }
         return coups;
     }*/
+    
     
  
     public void debuterPartie() {
@@ -121,7 +123,9 @@ public class fenetreDeJeu extends javax.swing.JFrame  {
         
     }
     
-
+    int X = -1; // en lien avec le nb de click pour colorier a la suite dans l'orde les cases
+    int Y = -1;
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -335,9 +339,13 @@ public class fenetreDeJeu extends javax.swing.JFrame  {
 
     private void btn_rougeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_rougeActionPerformed
         // TODO add your handling code here:
+        X += 1;
+        Y += 1;
+        X = X/4; //division entiere pour nb ligne
+        Y = Y%4; // modulo pour nb colonne
         zone_mess.setText("Vous avez clique sur le bouton rouge");
         //test d'affectation couleur rouge à la cellule[1][1] (soit 2eme ligne 2eme colonne)
-        grilleCouleurs[1][1].affecterCouleur("rouge");
+        grilleCouleurs[X][Y].affecterCouleur("rouge");
         repaint();
         //comment faire l'affectation / récupération de la ligne et col à colorier
         //stocker un x et un y global qui dit l'endroit du jeu où on en est
@@ -346,7 +354,7 @@ public class fenetreDeJeu extends javax.swing.JFrame  {
     private void btn_orangeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_orangeActionPerformed
         // TODO add your handling code here:
         zone_mess.setText("Vous avez clique sur le bouton orange");
-        
+        grilleCouleurs[1][2].affecterCouleur("orange");
         //grilleCouleurs[1][1].setBackground(Color.orange);
     }//GEN-LAST:event_btn_orangeActionPerformed
 

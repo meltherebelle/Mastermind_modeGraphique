@@ -36,14 +36,13 @@ public class Combinaison {
         for (int i = 0; i < 4; i++) {
             int c = rand.nextInt(5);
             combSecret[i] = TabCouleur[c];
-            //on devra aussi trouver un moyen d'--> affecterCouleur(TabCouleur[c]); à la cellule graphique
         }
 
         System.out.println("La combinaison secrète tirée aléatoirement est : " + Arrays.toString(combSecret));
         return combSecret;
     }
 
-    public String[] combinaisonChoisie() {
+    /*public String[] combinaisonChoisie() {
 
         //on remet le tabcouleur ici en attendant de trouver une nouvelle organisation dans le code pour y acceder sans le remettre dans chaque méthode (ex --> creer une nouvelle classe de Couleur et methode TabCouelur)
         String TabCouleur[] = new String[6];
@@ -70,9 +69,8 @@ public class Combinaison {
         }
         
         System.out.println("La combinaison choisie est : " + Arrays.toString(combChoisie));
-
         return combChoisie;
-    }
+    }*/
 
     //compare la combinaison secrete et la combinaison choisie
     //renvoie le nombre de bonnes couleurs et le nombre de bonne couleur+placement

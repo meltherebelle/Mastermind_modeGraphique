@@ -12,26 +12,26 @@ import java.awt.event.ActionListener;
 import java.util.Random;
 import javax.swing.JLabel;
 import javax.swing.JButton;
+
 /**
  *
- * @author 
+ * @author
  */
-public class fenetreDeJeu extends javax.swing.JFrame  {
+public class fenetreDeJeu extends javax.swing.JFrame {
 
     /**
      * Creates new form fenetreDeJeu
      */
     CelluleGraphique grilleCouleurs[][] = new CelluleGraphique[12][4];
+
     public fenetreDeJeu() {
         initComponents();
 
         panneau_grille.setVisible(false);
         panneau_infos.setVisible(false);
-        
+
         //creation d'une matrice 12 x 4 contenant des cellules Graphiques
-        
-        
-        for (int line = 0; line <12; line++) {
+        for (int line = 0; line < 12; line++) {
             for (int column = 0; column < 4; column++) {
                 String color = "vide"; //on initialise les cellules Graphiques sans couleur
                 CelluleGraphique cellGraph = new CelluleGraphique(line, column, color);
@@ -43,15 +43,14 @@ public class fenetreDeJeu extends javax.swing.JFrame  {
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         cellGraph.affecterCouleur("rouge");
-                        System.out.println("Vous avez cliqué sur le bouton de coordonnées "+cellGraph);
+                        System.out.println("Vous avez cliqué sur le bouton de coordonnées " + cellGraph);
                     }
-                    
+
                 });
             }
         }
     }
-    
-    
+
     /*public int Options() {
         int coups = 0;
         //afficher mess
@@ -72,20 +71,17 @@ public class fenetreDeJeu extends javax.swing.JFrame  {
         }
         return coups;
     }*/
-    
-    
- public
-            String combSecret[] = new String[4];
-    public void debuterPartie() {
 
-        
+    public String[] debuterPartie() { //on va renvoyer la combS générée en début de partie pour ne pas avoir à la regénérer
+
         zone_mess.setText("Bienvenue dans le MasterMind de Scotty & Lélé :\nUne combinaison secrète a été tirée.\nVeuillez choisir une combinaison de couleurs\nen cliquant sur la palette ci-dessous ;)");
-        
+
         //on génère une combinaison secrete
-        //Combinaison cs = new Combinaison();
-        //String[] combSecret = cs.combinaisonSecrete(); //on recup la combS dans une variable pour ensuite l'afficher
-        //lbl_combSecrete.setText("La combinaison secrete tirée est : "+ Arrays.toString(combSecret));
-        
+        Combinaison cs = new Combinaison();
+        String[] combSecret = cs.combinaisonSecrete(); //on recup la combS dans une variable pour ensuite l'afficher
+        lbl_combSecrete.setText("La combinaison secrete tirée est : " + Arrays.toString(combSecret));
+        return combSecret;
+
         /* !!!!!
         //int nbCoups = Options(); //choix difficulté du niveau
         int nbCoups = 10; //pour l'instant
@@ -122,11 +118,8 @@ public class fenetreDeJeu extends javax.swing.JFrame  {
             }
            
         }*/
-         
-        
     }
-    
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -336,155 +329,118 @@ public class fenetreDeJeu extends javax.swing.JFrame  {
 
         setBounds(0, 0, 1030, 693);
     }// </editor-fold>//GEN-END:initComponents
-    int X = -1; // en lien avec le nb de click pour colorier a la suite dans l'orde les cases
-    int Y = -1;
     
-    public
-            String combChoisie[] = new String[4];
+    int X = 0; // en lien avec le nb de click pour colorier a la suite dans l'orde les cases
+    int Y = -1; //on commence à -1 car au premier clique on rajoute +1 pour que ce soit sur la case 0 et non 1
     
-    /*public String[] combinaisonSecrete() {
+    public String combChoisie[] = new String[4];
 
-        //creation tableau contenant les 6 couleurs possibles
-        String TabCouleur[] = new String[6];
-        TabCouleur[0] = "Rouge";
-        TabCouleur[1] = "Jaune";
-        TabCouleur[2] = "Vert";
-        TabCouleur[3] = "Bleu";
-        TabCouleur[4] = "Orange";
-        TabCouleur[5] = "Magenta";
-
-        //tirage aléatoire des couleurs contenues dans le code
-        Random rand = new Random();
-        for (int i = 0; i < 4; i++) {
-            int c = rand.nextInt(5);
-            combSecret[i] = TabCouleur[c];
-            //on devra aussi trouver un moyen d'--> affecterCouleur(TabCouleur[c]); à la cellule graphique
-        }
-        return combSecret;
-    } */
     int cpt = 0;
     int cptCmbC = -1;
-    public void Jeu(){
-            cptCmbC = 0;
-            Combinaison cs = new Combinaison();
-            String[] combSecret = cs.combinaisonSecrete(); //on recup la combS dans une variable pour ensuite l'afficher
-            lbl_combSecrete.setText("La combinaison secrete tirée est : "+ Arrays.toString(combSecret));
-        //while(cpt%4 == 0){ // fais l'action tout les 4 clics
-        if(cpt%4==0){ //fais l'action tout les 4 clics
-            //on détermine les nb coul & coul + placement OK
-            Combinaison compare = new Combinaison();
+
+    public void Jeu() {
+        boolean finDePartie = false; //pour break des que partie finie (perdue ou gagnée)
+        /*Combinaison cs = new Combinaison(); //on genere une combinaison secrete
+            String[] combSecret = cs.combinaisonSecrete(); //on recup la combSecrete dans une variable pour ensuite l'afficher
+            lbl_combSecrete.setText("La combinaison secrete tirée est : "+ Arrays.toString(combSecret));*/
+        //while(cpt%4 == 0){ // fais l'action tous les 4 clics
+        
+        if (cpt == 4) { //fait l'action tous les 4 clics
             
+            cpt = 0; //on repart à 0 clic pour la prochaine comb
+            cptCmbC = 0; //indice qui remplie tableau CombC remit à 0
+            X += 1; //on passe à la ligne d'apres (prochaine comb)
+            Y = -1; //on repart de la colonne 0 (ca +1 des qu'on clique)
+            String[] combSecret = debuterPartie(); //on récupère la combS générée en debut de partie pour la comparer par la suite
+            Combinaison compare = new Combinaison(); //on détermine les nb coul & coul + placement OK
+            int[] nbok = compare.Comparaison(combSecret, combChoisie); //on récupère le résultat de la comparaison dans un tableau
             
-            int[] nbok = compare.Comparaison(combSecret, combChoisie);
-            
-            //Test affichage coparaisons
-            textarea_CoulOK.setText("nb bonne couleurs: "+ nbok[0]);
-            textarea_CoulPlacmtOK.setText("nb bon placement"+ nbok[1]);
-            
+            //Affichage résultats des comparaisons
+            zone_mess.setText(nbok+"");
+            textarea_CoulOK.setText(nbok[0] + "");
+            textarea_CoulPlacmtOK.setText(nbok[1] + "");
+
             //on verifie si c'est une combinaison gagnante
-            Combinaison etregagnant = new Combinaison();         
+            Combinaison etregagnant = new Combinaison();
             boolean gagner = etregagnant.Gagner(nbok);
-            
+            zone_mess.setText("gagnant : "+gagner);
+
             if (gagner == true) {
                 zone_mess.setText("Vous avez deviné le code secret !!! ");
-                
+                finDePartie = true;
+            }
+            if ( (gagner == false) && ((Y==3) && (X==3)) ) { //perdu
+                zone_mess.setText("You're a L O S E R ... :( ");
+                finDePartie = true;
             }
             else {
-                zone_mess.setText("Retentez votre chance");
-                
+                zone_mess.setText("Retentez votre chance\nVeuillez choisir une prochaine combinaison de couleurs\nen cliquant sur la palette ci-dessous ;)");
             }
             
         }
         
-    }
-    
-    /*int [] NB_OK = new int[2];
-    public int[] Comparaison(String[] combS, String[] combC) {
+        repaint();
 
-        int nbCoul_OK = 0;
-        int nbCoul_PlacmtOK = 0;
-        //permet de checker le placement & couleur
-        boolean[] BoolC = new boolean [4];
-        boolean[] BoolS = new boolean [4];
-        
-        //comparaison des couleurs + placement
-        for (int i = 0; i < 4 ; i++) {
-            //on regarde d'abord si les deux tableaux ne sont pas déjà checké
-            if ( (BoolC[i] != true) && (BoolS[i] != true) ) {
-                //si il ne sont pas encore checké on compare la combC et combS
-                if (combS[i].equals(combC[i])) {
-                    //on check les tableaux de booleans
-                    BoolC[i] = true;
-                    BoolS[i] = true;
-                    nbCoul_PlacmtOK += 1;
-                }
-            }  
-        }
-        
-        //si pas checké on regarde si la couleur choisie de la case que l'on regarde est identique à une des couleurs du secret / sinon on ne vérifie pas
-        //comparaison des couleurs
-        for (int i = 0; i < 4; i ++) {
-            //on regarde si bolC n'est pas déjà checké
-            if ( (BoolC[i] != true) && (BoolC[i] != true) ) {
-                //si pas encore checké on regarde si la couleur[i] de combC correspond à une des couleurs de combS
-                for (int j = 0; j < 4; j++) {
-                    if (combC[i].equals(combS[j])) {
-                        //on check le tableau des booleans
-                        BoolC[i] = true;
-                        BoolS[i] = true;
-                        nbCoul_OK += 1;
-                        break;
-                    }
-                }
-            }
-        }
-       
-        //int [] NB_OK = new int[2];
-        NB_OK[0] = nbCoul_OK;
-        NB_OK[1] = nbCoul_PlacmtOK;
-        //int[] arrayNB_OK = new int[] {nbCoul_OK, nbCoul_PlacmtOK};
-        //System.out.println("nb de couleurs OK : "+arrayNB_OK[0] + ", nb de coul+placement OK : "+ arrayNB_OK[1]);
-        return NB_OK;
     }
-    */
+
 
     private void btn_rougeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_rougeActionPerformed
         // TODO add your handling code here:
         cpt += 1; //nb de clic +1 pour Jeu()
-        cptCmbC +=1; // compteur pour chaque cellule de combChoisie
-        X += 1;
+        cptCmbC += 1; // compteur pour chaque cellule de combChoisie
+        //X += 1; //on stocke un x et un y global qui dit l'endroit du jeu où on en est
         Y += 1;
-        X = X/4; //division entiere pour nb ligne
-        Y = Y%4; // modulo pour nb colonne
-        zone_mess.setText("Y"+Y+"X"+X); // Y n'augmente pas ???
-       
-        //zone_mess.setText("Vous avez clique sur le bouton rouge");
+        zone_mess.setText("Vous avez clique sur le bouton rouge\nOn en est à Y : " + Y + " et X :" + X + "\n cpt = " + cpt + " cptCombC = " + cptCmbC);
+        //X = X / 4; //division entiere pour nb ligne --> plutot /12 ou /4 comme tavais mit ? a tester
+        //Y = Y % 4; // modulo pour nb colonne
         
         grilleCouleurs[X][Y].affecterCouleur("rouge");
-        repaint();
-        combChoisie[cptCmbC]="rouge"; // rentre rouge dans colonne pour ensuite comparer
-        //zone_mess.setText(combChoisie[1]);// la couleur se mets bien
+        combChoisie[cptCmbC] = "rouge"; // rentre rouge dans colonne pour ensuite comparer
         
-        //comment faire l'affectation / récupération de la ligne et col à colorier
-        //stocker un x et un y global qui dit l'endroit du jeu où on en est
+        repaint();
+        Jeu();
     }//GEN-LAST:event_btn_rougeActionPerformed
 
     private void btn_orangeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_orangeActionPerformed
         // TODO add your handling code here:
-        zone_mess.setText("Vous avez clique sur le bouton orange");
-        //grilleCouleurs[1][2].affecterCouleur("orange");
-        //grilleCouleurs[1][1].setBackground(Color.orange);
+        cpt += 1; //nb de clic +1 pour Jeu()
+        cptCmbC += 1; // compteur pour chaque cellule de combChoisie
+        //X += 1; //on stocke un x et un y global qui dit l'endroit du jeu où on en est
+        Y += 1;
+        zone_mess.setText("Vous avez clique sur le bouton orange\nOn en est à Y : " + Y + " et X :" + X + "\n cpt = " + cpt + " cptCombC = " + cptCmbC);
+
+        //X = X / 4; //division entiere pour nb ligne
+        //Y = Y % 4; // modulo pour nb colonne
+
+        grilleCouleurs[X][Y].affecterCouleur("orange");
+        
+        combChoisie[cptCmbC] = "orange"; // rentre orange dans colonne pour ensuite comparer
+
+        repaint();
         Jeu();
     }//GEN-LAST:event_btn_orangeActionPerformed
 
     private void btn_magentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_magentaActionPerformed
         // TODO add your handling code here:
-        zone_mess.setText("Vous avez clique sur le bouton magenta");
+        cpt += 1; //nb de clic +1 pour Jeu()
+        cptCmbC += 1; // compteur pour chaque cellule de combChoisie
+        //X += 1; //on stocke un x et un y global qui dit l'endroit du jeu où on en est
+        Y += 1;
+        zone_mess.setText("Vous avez clique sur le bouton magenta\nOn en est à Y : " + Y + " et X :" + X + "\n cpt = " + cpt + " cptCombC = " + cptCmbC);
+        //X = X / 4; //division entiere pour nb ligne
+        //Y = Y % 4; // modulo pour nb colonne
+
+        grilleCouleurs[X][Y].affecterCouleur("magenta");
+        combChoisie[cptCmbC] = "magenta"; // rentre magenta dans colonne pour ensuite comparer
+
+        repaint();
+        Jeu();
+        
         //TEST POUR COMPARER LES COMBINAISONS
         //Comparaison(combSecret,combChoisie); // test si ca compare
         //textarea_CoulOK.setText("nb de bonne couleurs: "+NB_OK[0]);
         //textarea_CoulPlacmtOK.setText("nn de bon placement"+NB_OK[1]);
-        //grilleCouleurs[1][1].setBackground(Color.pink);
+
     }//GEN-LAST:event_btn_magentaActionPerformed
 
     private void btn_demarrerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_demarrerActionPerformed
@@ -497,25 +453,58 @@ public class fenetreDeJeu extends javax.swing.JFrame  {
 
     private void btn_vertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_vertActionPerformed
         // TODO add your handling code here:
-        zone_mess.setText("Vous avez clique sur le bouton vert");
+        cpt += 1; //nb de clic +1 pour Jeu()
+        cptCmbC += 1; // compteur pour chaque cellule de combChoisie
         
-        //grilleCouleurs[1][1].setBackground(Color.green);
+        //X += 1; //on stocke un x et un y global qui dit l'endroit du jeu où on en est
+        Y += 1;
+        zone_mess.setText("Vous avez clique sur le bouton vert\nOn en est à Y : " + Y + " et X :" + X + "\n cpt = " + cpt + " cptCombC = " + cptCmbC);
+        //X = X / 4; //division entiere pour nb ligne
+        //Y = Y % 4; // modulo pour nb colonne
+
+        grilleCouleurs[X][Y].affecterCouleur("vert");
+        combChoisie[cptCmbC] = "vert"; // rentre magenta dans colonne pour ensuite comparer
+
+        repaint();
+        Jeu();
     }//GEN-LAST:event_btn_vertActionPerformed
 
     private void btn_jauneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_jauneActionPerformed
         // TODO add your handling code here:
-        zone_mess.setText("Vous avez clique sur le bouton jaune");
-        //grilleCouleurs[1][1].setBackground(Color.yellow);
+        cpt += 1; //nb de clic +1 pour Jeu()
+        cptCmbC += 1; // compteur pour chaque cellule de combChoisie
+        //X += 1; //on stocke un x et un y global qui dit l'endroit du jeu où on en est
+        Y += 1;
+        zone_mess.setText("Vous avez clique sur le bouton jaune\nOn en est à Y : " + Y + " et X :" + X + "\n cpt = " + cpt + " cptCombC = " + cptCmbC);
+        //X = X / 4; //division entiere pour nb ligne
+        //Y = Y % 4; // modulo pour nb colonne
+
+        grilleCouleurs[X][Y].affecterCouleur("jaune");
+        combChoisie[cptCmbC] = "jaune"; // rentre magenta dans colonne pour ensuite comparer
+
+        repaint();
+        Jeu();
     }//GEN-LAST:event_btn_jauneActionPerformed
 
     private void btn_bleuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_bleuActionPerformed
         // TODO add your handling code here:
-        zone_mess.setText("Vous avez clique sur le bouton bleu");
-        //grilleCouleurs[1][1].setBackground(Color.blue);
+        cpt += 1; //nb de clic +1 pour Jeu()
+        cptCmbC += 1; // compteur pour chaque cellule de combChoisie
+        //X += 1; //on stocke un x et un y global qui dit l'endroit du jeu où on en est
+        Y += 1;
+        zone_mess.setText("Vous avez clique sur le bouton bleu\nOn en est à Y : " + Y + " et X :" + X + "\n cpt = " + cpt + " cptCombC = " + cptCmbC);
+        //X = X / 4; //division entiere pour nb ligne
+        //Y = Y % 4; // modulo pour nb colonne
+
+        grilleCouleurs[X][Y].affecterCouleur("bleu");
+        combChoisie[cptCmbC] = "bleu"; // rentre magenta dans colonne pour ensuite comparer
+
+        repaint();
+        Jeu();
     }//GEN-LAST:event_btn_bleuActionPerformed
 
     //public void affecterCouleurGrille(int a,int b){
-        //grilleCouleurs[a][b].
+    //grilleCouleurs[a][b].
     //}
     /**
      * @param args the command line arguments

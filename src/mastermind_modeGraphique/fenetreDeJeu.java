@@ -22,15 +22,27 @@ public class fenetreDeJeu extends javax.swing.JFrame {
     /**
      * Creates new form fenetreDeJeu
      */
-    
-    
     CelluleGraphique grilleCouleurs[][] = new CelluleGraphique[12][4];
+    int[] compteurs = initialiserCmpt();
+    int X = compteurs[0];
+    int Y = compteurs[1]; //on commence à -1 car au premier clique on rajoute +1 pour que ce soit sur la case 0 et non 1
+    int cpt = compteurs[2];
+    int cptCmbC = compteurs[3];
+
+    public String combChoisie[] = new String[4];
+
+    int[] nbok; // declaration de nbok
+
+    String[] combSecret = debuterPartie(); //on récupère la combS générée en debut de partie pour la comparer par la suite
 
     public fenetreDeJeu() {
         initComponents();
 
+        zone_mess.setText("Bienvenue dans le Mastermind !\n• Choissisez un niveau\n• Cliquez sur Démarrer partie");
+        lbl_niveauChoix.setVisible(false);
         panneau_grille.setVisible(false);
         panneau_infos.setVisible(false);
+        panneau_couleurs.setVisible(false);
 
         //creation d'une matrice 12 x 4 contenant des cellules Graphiques
         for (int line = 0; line < 12; line++) {
@@ -53,28 +65,47 @@ public class fenetreDeJeu extends javax.swing.JFrame {
         }
     }
 
-    /*public int Options() {
-        int coups = 0;
-        //afficher mess
-        
-        //System.out.println("Choisissez un mode :\n1. Niveau facile\n2. Niveau moyen \n3. Niveau difficile");
-        
-        //creer 3 boutons de niveau difficulté à la place du scanner
-        //Scanner sc = new Scanner(System.in);
-        int choixniveau = sc.nextInt();
-        if (choixniveau == 1) {
-            coups = 12;//partie de base (facile)
-        }
-        else if (choixniveau == 2) {
-            coups = 9; //partie niveau moyen
-        }
-        else if (choixniveau == 3) {
-            coups = 5; //partie niveau difficile
-        }
-        return coups;
-    }*/
+    public int[] initialiserCmpt() {
+        int[] compteurs = new int[4];
 
-   public void viderGrille() {
+        compteurs[0] = 0; //int X = 0; // en lien avec le nb de click pour colorier a la suite dans l'orde les cases
+        compteurs[1] = -1; //int Y = -1; //on commence à -1 car au premier clique on rajoute +1 pour que ce soit sur la case 0 et non 1
+        compteurs[2] = 0; //int cpt = 0; //compteur nb couleurs cliquées
+        compteurs[3] = -1; //int cptCmbC = -1; //compteur indice pour remplir liste combChoisie
+
+        return compteurs;
+    }
+
+    public int Options() {
+
+        //mess_options.setText("Choisissez un mode : facile / moyen / difficile");
+        System.out.println("Choisissez un mode :\n1. Niveau facile\n2. Niveau moyen \n3. Niveau difficile");
+
+        String choix = "facile"; //si jamais ca marche pas
+
+        //choix = lbl_choixNiv.getText();
+        System.out.println("Niveau choisi : " + choix);
+
+        int nbcoups = 0;
+
+        if (choix == "facile") {
+            nbcoups = 12;
+        }
+
+        if (choix == "moyen") {
+            nbcoups = 6;
+        }
+
+        if (choix == "difficile") {
+            nbcoups = 3;
+        }
+
+        System.out.println("Vous disposez de " + nbcoups + " coups");
+
+        return nbcoups;
+    }
+
+    public void viderGrille() {
 
         for (int line = 0; line < 12; line++) {
 
@@ -92,28 +123,73 @@ public class fenetreDeJeu extends javax.swing.JFrame {
 
     public String[] debuterPartie() { //on va renvoyer la combS générée en début de partie pour ne pas avoir à la regénérer
 
-        //on rafraichie la grille
+        if (X != 0) {
+            //on rafraichie la grille
+            //viderGrille(); //beug sur ordi lea
+        }
 
-        viderGrille();
+        //on initialise les compteurs
+        initialiserCmpt();
 
         //on génère une combinaison secrete
-
         Combinaison cs = new Combinaison();
-
         String[] combSecret = cs.combinaisonSecrete(); //on recup la combS dans une variable pour ensuite l'afficher
-
-       
-
-        //lbl_combSecrete.setText("Pour vous faciliter la tâche, voir le code secret ci-dessous\nLa combinaison secrète tirée est : " + Arrays.toString(combSecret));
-
-        //int nbCoups = Options(); //choix difficulté du niveau
 
         repaint();
 
         return combSecret;
 
     }
-  /**
+
+    int nbCoups = Options();
+
+    public void Jeu() {
+
+        lbl_combSecrete.setText("Pour vous faciliter la tâche...\nLa combinaison secrete tirée est : " + Arrays.toString(combSecret));
+        boolean finDePartie = false; //pour break des que partie finie (perdue ou gagnée)
+
+        if (cpt == 4) { //fait l'action tous les 4 clics
+
+            cpt = 0; //on repart à 0 clic pour la prochaine comb
+            cptCmbC = -1; //indice reinitialisé pour pas out of bound
+            X += 1; //on passe à la ligne d'apres (prochaine comb)
+            Y = -1; //on repart de la colonne 0 (ca +1 des qu'on clique)
+
+            Combinaison compare = new Combinaison(); //on détermine les nb coul & coul + placement OK
+            nbok = compare.Comparaison(combSecret, combChoisie); //on récupère le résultat de la comparaison dans un tableau
+
+            //Affichage résultats des comparaisons
+            textarea_CoulOK.setText(nbok[0] + "");
+            textarea_CoulPlacmtOK.setText(nbok[1] + "");
+
+            //on verifie si c'est une combinaison gagnante
+            Combinaison etregagnant = new Combinaison();
+            boolean gagner = etregagnant.Gagner(nbok);
+            System.out.println("gagnant :" + gagner);
+            //zone_mess.setText("gagnant : "+gagner+ "");
+
+            if (gagner == true) {
+                zone_mess.setText("Vous avez deviné le code secret !!! \n Appuyer sur DEMARRER pour recommencer ");// la condition marche mais ca veut pas afficher dans zone_mess
+                //btn_rouge.setEnabled(false); // ON POURRAIT DISABLE LA PALETTE DE COULEUR SAUF DEMMARER COMME CA ON PEUT REJOUER
+                btn_demarrer.setVisible(true); // PROBLEME creation de combSecret dans code et non dans fonction 
+                finDePartie = true;
+            }
+
+            if ((X == nbCoups) && (gagner == false)) { //perdu
+                zone_mess.setText("You're a L O S E R ... :( ");
+                finDePartie = true;
+            }
+            if (finDePartie == false) {
+                zone_mess.setText("Retentez votre chance\nVeuillez choisir une prochaine combinaison de couleurs\nen cliquant sur la palette ci-dessous ;)");
+            }
+
+        }
+
+        repaint();
+
+    }
+
+    /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
      * regenerated by the Form Editor.
@@ -140,15 +216,23 @@ public class fenetreDeJeu extends javax.swing.JFrame {
         panneau_infos = new javax.swing.JPanel();
         lbl_infos_partie = new javax.swing.JLabel();
         lbl_nbCoul = new javax.swing.JLabel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        textarea_CoulOK = new javax.swing.JTextArea();
         lbl_nbCoulPlacmt = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         textarea_CoulPlacmtOK = new javax.swing.JTextArea();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        textarea_CoulOK = new javax.swing.JTextArea();
+        lbl_nbCoul1 = new javax.swing.JLabel();
         btn_demarrer = new javax.swing.JButton();
         panneau_combSecrete = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
         lbl_combSecrete = new javax.swing.JTextArea();
+        panneau_options = new javax.swing.JPanel();
+        lbl_options = new javax.swing.JLabel();
+        btn_moyen = new javax.swing.JButton();
+        btn_difficile = new javax.swing.JButton();
+        btn_facile = new javax.swing.JButton();
+        lbl_niveauChoix = new javax.swing.JLabel();
+        lbl_choixNiv = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -210,7 +294,7 @@ public class fenetreDeJeu extends javax.swing.JFrame {
                 btn_rougeActionPerformed(evt);
             }
         });
-        panneau_couleurs.add(btn_rouge, new org.netbeans.lib.awtextra.AbsoluteConstraints(3, 71, 130, 100));
+        panneau_couleurs.add(btn_rouge, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 80, 130, 100));
 
         btn_vert.setBackground(new java.awt.Color(0, 255, 102));
         btn_vert.setText("Vert");
@@ -219,7 +303,7 @@ public class fenetreDeJeu extends javax.swing.JFrame {
                 btn_vertActionPerformed(evt);
             }
         });
-        panneau_couleurs.add(btn_vert, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 70, 140, 100));
+        panneau_couleurs.add(btn_vert, new org.netbeans.lib.awtextra.AbsoluteConstraints(135, 80, 130, 100));
 
         btn_jaune.setBackground(new java.awt.Color(255, 255, 0));
         btn_jaune.setText("Jaune");
@@ -228,7 +312,7 @@ public class fenetreDeJeu extends javax.swing.JFrame {
                 btn_jauneActionPerformed(evt);
             }
         });
-        panneau_couleurs.add(btn_jaune, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 70, 133, 100));
+        panneau_couleurs.add(btn_jaune, new org.netbeans.lib.awtextra.AbsoluteConstraints(266, 80, 130, 100));
 
         btn_bleu.setBackground(new java.awt.Color(0, 51, 255));
         btn_bleu.setText("Bleu");
@@ -237,7 +321,7 @@ public class fenetreDeJeu extends javax.swing.JFrame {
                 btn_bleuActionPerformed(evt);
             }
         });
-        panneau_couleurs.add(btn_bleu, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 173, 127, 101));
+        panneau_couleurs.add(btn_bleu, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 180, 130, 100));
 
         btn_orange.setBackground(new java.awt.Color(255, 153, 0));
         btn_orange.setText("Orange");
@@ -246,7 +330,7 @@ public class fenetreDeJeu extends javax.swing.JFrame {
                 btn_orangeActionPerformed(evt);
             }
         });
-        panneau_couleurs.add(btn_orange, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 170, 127, 107));
+        panneau_couleurs.add(btn_orange, new org.netbeans.lib.awtextra.AbsoluteConstraints(135, 180, 130, 100));
 
         btn_magenta.setBackground(new java.awt.Color(255, 0, 204));
         btn_magenta.setText("Magenta");
@@ -255,7 +339,7 @@ public class fenetreDeJeu extends javax.swing.JFrame {
                 btn_magentaActionPerformed(evt);
             }
         });
-        panneau_couleurs.add(btn_magenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 170, 130, 107));
+        panneau_couleurs.add(btn_magenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(266, 180, 130, 100));
 
         getContentPane().add(panneau_couleurs, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 360, 400, 280));
 
@@ -268,13 +352,6 @@ public class fenetreDeJeu extends javax.swing.JFrame {
         lbl_nbCoul.setText("nombre de bonnes couleurs :");
         panneau_infos.add(lbl_nbCoul, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, 200, 73));
 
-        textarea_CoulOK.setColumns(2);
-        textarea_CoulOK.setRows(1);
-        textarea_CoulOK.setTabSize(1);
-        jScrollPane2.setViewportView(textarea_CoulOK);
-
-        panneau_infos.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 60, 140, 50));
-
         lbl_nbCoulPlacmt.setText("nombre de couleurs bien placées :");
         panneau_infos.add(lbl_nbCoulPlacmt, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, 230, 73));
 
@@ -282,7 +359,17 @@ public class fenetreDeJeu extends javax.swing.JFrame {
         textarea_CoulPlacmtOK.setRows(1);
         jScrollPane3.setViewportView(textarea_CoulPlacmtOK);
 
-        panneau_infos.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 120, 140, 50));
+        panneau_infos.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 120, 120, 50));
+
+        textarea_CoulOK.setColumns(2);
+        textarea_CoulOK.setRows(1);
+        textarea_CoulOK.setTabSize(1);
+        jScrollPane5.setViewportView(textarea_CoulOK);
+
+        panneau_infos.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 60, 120, 50));
+
+        lbl_nbCoul1.setText("nombre de bonnes couleurs :");
+        panneau_infos.add(lbl_nbCoul1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, 200, 73));
 
         getContentPane().add(panneau_infos, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 170, 400, 190));
 
@@ -313,100 +400,101 @@ public class fenetreDeJeu extends javax.swing.JFrame {
         panneau_combSecreteLayout.setVerticalGroup(
             panneau_combSecreteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panneau_combSecreteLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(8, Short.MAX_VALUE)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
         getContentPane().add(panneau_combSecrete, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 580, 60));
 
-        setBounds(0, 0, 1030, 693);
+        panneau_options.setBackground(new java.awt.Color(153, 153, 153));
+
+        lbl_options.setText("Options :");
+
+        btn_moyen.setBackground(new java.awt.Color(255, 204, 51));
+        btn_moyen.setText("Moyen");
+        btn_moyen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_moyenActionPerformed(evt);
+            }
+        });
+
+        btn_difficile.setBackground(new java.awt.Color(204, 0, 0));
+        btn_difficile.setText("Difficile");
+        btn_difficile.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_difficileActionPerformed(evt);
+            }
+        });
+
+        btn_facile.setBackground(new java.awt.Color(204, 255, 204));
+        btn_facile.setText("Facile");
+        btn_facile.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_facileActionPerformed(evt);
+            }
+        });
+
+        lbl_niveauChoix.setText("Niveau Choisi :");
+
+        lbl_choixNiv.setText(" ");
+
+        javax.swing.GroupLayout panneau_optionsLayout = new javax.swing.GroupLayout(panneau_options);
+        panneau_options.setLayout(panneau_optionsLayout);
+        panneau_optionsLayout.setHorizontalGroup(
+            panneau_optionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panneau_optionsLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(panneau_optionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lbl_options)
+                    .addGroup(panneau_optionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(panneau_optionsLayout.createSequentialGroup()
+                            .addGroup(panneau_optionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(lbl_niveauChoix, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(lbl_choixNiv, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panneau_optionsLayout.createSequentialGroup()
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(panneau_optionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(btn_difficile, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btn_moyen, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btn_facile, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(38, Short.MAX_VALUE))
+        );
+        panneau_optionsLayout.setVerticalGroup(
+            panneau_optionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panneau_optionsLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lbl_options)
+                .addGap(134, 134, 134)
+                .addComponent(btn_facile, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btn_moyen, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btn_difficile, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(50, 50, 50)
+                .addComponent(lbl_niveauChoix)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lbl_choixNiv)
+                .addContainerGap(154, Short.MAX_VALUE))
+        );
+
+        getContentPane().add(panneau_options, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 20, 180, 620));
+
+        setBounds(0, 0, 1227, 684);
     }// </editor-fold>//GEN-END:initComponents
-    
-    int X = 0; // en lien avec le nb de click pour colorier a la suite dans l'orde les cases
-    int Y = -1; //on commence à -1 car au premier clique on rajoute +1 pour que ce soit sur la case 0 et non 1
-    
-    public String combChoisie[] = new String[4];
-
-    int cpt = 0;
-    int cptCmbC = -1;
-    Combinaison cs = new Combinaison();
-    String[] combSecret = cs.combinaisonSecrete(); //on recup la combS dans une variable pour ensuite l'afficher
-    
-    int[] nbok; // declaration de nbok
-    //String[] combSecret = debuterPartie(); //on récupère la combS générée en debut de partie pour la comparer par la suite
-    
-    public void Jeu() {
-        lbl_combSecrete.setText("La combinaison secrete tirée est : " + Arrays.toString(combSecret));
-        boolean finDePartie = false; //pour break des que partie finie (perdue ou gagnée)
-        /*Combinaison cs = new Combinaison(); //on genere une combinaison secrete
-            String[] combSecret = cs.combinaisonSecrete(); //on recup la combSecrete dans une variable pour ensuite l'afficher
-            lbl_combSecrete.setText("La combinaison secrete tirée est : "+ Arrays.toString(combSecret));*/
-        //while(cpt%4 == 0){ // fais l'action tous les 4 clics
-        
-        if (cpt == 4) { //fait l'action tous les 4 clics
-            
-            cpt = 0; //on repart à 0 clic pour la prochaine comb
-            cptCmbC = -1; //indice reinitialisé pour pas out of bound
-            X += 1; //on passe à la ligne d'apres (prochaine comb)
-            Y = -1; //on repart de la colonne 0 (ca +1 des qu'on clique)
-            
-            Combinaison compare = new Combinaison(); //on détermine les nb coul & coul + placement OK
-            nbok = compare.Comparaison(combSecret, combChoisie); //on récupère le résultat de la comparaison dans un tableau
-            
-            //Affichage résultats des comparaisons
-            zone_mess.setText(nbok+"");
-            textarea_CoulOK.setText(nbok[0] + "");
-            textarea_CoulPlacmtOK.setText(nbok[1] + "");
-
-            //on verifie si c'est une combinaison gagnante
-            Combinaison etregagnant = new Combinaison();
-            boolean gagner = etregagnant.Gagner(nbok);
-            System.out.println("gagnat!!!"+gagner);
-            //zone_mess.setText("gagnant : "+gagner+ "");
-
-            if (gagner == true) {
-                zone_mess.setText("Vous avez deviné le code secret !!! \n Appuyer sur DEMARRER pour recommencer ");// la condition marche mais ca veut pas afficher dans zone_mess
-                //btn_rouge.setEnabled(false); // ON POURRAIT DISABLE LA PALETTE DE COULEUR SAUF DEMMARER COMME CA ON PEUT REJOUER
-                btn_demarrer.setVisible(true); // PROBLEME creation de combSecret dans code et non dans fonction 
-               
-                finDePartie = true;
-                //break; on peut pas break
-                
-                //repaint(); 
-                
-                
-            }
-            int nbCoups = 3;
-            if (((X==nbCoups)) ) { //perdu
-                
-                zone_mess.setText("You're a L O S E R ... :( ");
-                finDePartie = true;
-            }
-            if(finDePartie == false) {
-                zone_mess.setText("Retentez votre chance\nVeuillez choisir une prochaine combinaison de couleurs\nen cliquant sur la palette ci-dessous ;)");
-            }
-            
-        }
-        
-        repaint();
-
-    }
 
 
     private void btn_rougeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_rougeActionPerformed
         // TODO add your handling code here:
         cpt += 1; //nb de clic +1 pour Jeu()
         cptCmbC += 1; // compteur pour chaque cellule de combChoisie
-        //X += 1; //on stocke un x et un y global qui dit l'endroit du jeu où on en est
         Y += 1;
         zone_mess.setText("Vous avez clique sur le bouton rouge\nOn en est à Y : " + Y + " et X :" + X + "\n cpt = " + cpt + " cptCombC = " + cptCmbC);
-        //X = X / 4; //division entiere pour nb ligne --> plutot /12 ou /4 comme tavais mit ? a tester
-        //Y = Y % 4; // modulo pour nb colonne
-        
+
         grilleCouleurs[X][Y].affecterCouleur("rouge");
         combChoisie[cptCmbC] = "Rouge"; // rentre rouge dans colonne pour ensuite comparer
-        //zone_mess.setText("premiere case cmbChoisie"+combChoisie[0]);
+
         repaint();
         Jeu();
     }//GEN-LAST:event_btn_rougeActionPerformed
@@ -415,17 +503,13 @@ public class fenetreDeJeu extends javax.swing.JFrame {
         // TODO add your handling code here:
         cpt += 1; //nb de clic +1 pour Jeu()
         cptCmbC += 1; // compteur pour chaque cellule de combChoisie
-        //X += 1; //on stocke un x et un y global qui dit l'endroit du jeu où on en est
         Y += 1;
         zone_mess.setText("Vous avez clique sur le bouton orange\nOn en est à Y : " + Y + " et X :" + X + "\n cpt = " + cpt + " cptCombC = " + cptCmbC);
 
-        //X = X / 4; //division entiere pour nb ligne
-        //Y = Y % 4; // modulo pour nb colonne
-
         grilleCouleurs[X][Y].affecterCouleur("orange");
-        
+
         combChoisie[cptCmbC] = "Orange"; // rentre orange dans colonne pour ensuite comparer
-        
+
         repaint();
         Jeu();
     }//GEN-LAST:event_btn_orangeActionPerformed
@@ -434,29 +518,21 @@ public class fenetreDeJeu extends javax.swing.JFrame {
         // TODO add your handling code here:
         cpt += 1; //nb de clic +1 pour Jeu()
         cptCmbC += 1; // compteur pour chaque cellule de combChoisie
-        //X += 1; //on stocke un x et un y global qui dit l'endroit du jeu où on en est
         Y += 1;
         zone_mess.setText("Vous avez clique sur le bouton magenta\nOn en est à Y : " + Y + " et X :" + X + "\n cpt = " + cpt + " cptCombC = " + cptCmbC);
-        //X = X / 4; //division entiere pour nb ligne
-        //Y = Y % 4; // modulo pour nb colonne
 
         grilleCouleurs[X][Y].affecterCouleur("magenta");
         combChoisie[cptCmbC] = "Magenta"; // rentre magenta dans colonne pour ensuite comparer
 
         repaint();
         Jeu();
-        
-        //TEST POUR COMPARER LES COMBINAISONS
-        //Comparaison(combSecret,combChoisie); // test si ca compare
-        //textarea_CoulOK.setText("nb de bonne couleurs: "+NB_OK[0]);
-        //textarea_CoulPlacmtOK.setText("nn de bon placement"+NB_OK[1]);
-
     }//GEN-LAST:event_btn_magentaActionPerformed
 
     private void btn_demarrerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_demarrerActionPerformed
         panneau_grille.repaint(); //on vide la grille pour commencer une nouvelle partie
         panneau_grille.setVisible(true);
         panneau_infos.setVisible(true);
+        panneau_couleurs.setVisible(true);
         btn_demarrer.setVisible(false);
         debuterPartie();
     }//GEN-LAST:event_btn_demarrerActionPerformed
@@ -465,16 +541,12 @@ public class fenetreDeJeu extends javax.swing.JFrame {
         // TODO add your handling code here:
         cpt += 1; //nb de clic +1 pour Jeu()
         cptCmbC += 1; // compteur pour chaque cellule de combChoisie
-        
-        //X += 1; //on stocke un x et un y global qui dit l'endroit du jeu où on en est
         Y += 1;
         zone_mess.setText("Vous avez clique sur le bouton vert\nOn en est à Y : " + Y + " et X :" + X + "\n cpt = " + cpt + " cptCombC = " + cptCmbC);
-        //X = X / 4; //division entiere pour nb ligne
-        //Y = Y % 4; // modulo pour nb colonne
 
         grilleCouleurs[X][Y].affecterCouleur("vert");
         combChoisie[cptCmbC] = "Vert"; // rentre magenta dans colonne pour ensuite comparer
-        
+
         repaint();
         Jeu();
     }//GEN-LAST:event_btn_vertActionPerformed
@@ -483,11 +555,8 @@ public class fenetreDeJeu extends javax.swing.JFrame {
         // TODO add your handling code here:
         cpt += 1; //nb de clic +1 pour Jeu()
         cptCmbC += 1; // compteur pour chaque cellule de combChoisie
-        //X += 1; //on stocke un x et un y global qui dit l'endroit du jeu où on en est
         Y += 1;
         zone_mess.setText("Vous avez clique sur le bouton jaune\nOn en est à Y : " + Y + " et X :" + X + "\n cpt = " + cpt + " cptCombC = " + cptCmbC);
-        //X = X / 4; //division entiere pour nb ligne
-        //Y = Y % 4; // modulo pour nb colonne
 
         grilleCouleurs[X][Y].affecterCouleur("jaune");
         combChoisie[cptCmbC] = "Jaune"; // rentre magenta dans colonne pour ensuite comparer
@@ -500,11 +569,8 @@ public class fenetreDeJeu extends javax.swing.JFrame {
         // TODO add your handling code here:
         cpt += 1; //nb de clic +1 pour Jeu()
         cptCmbC += 1; // compteur pour chaque cellule de combChoisie
-        //X += 1; //on stocke un x et un y global qui dit l'endroit du jeu où on en est
         Y += 1;
         zone_mess.setText("Vous avez clique sur le bouton bleu\nOn en est à Y : " + Y + " et X :" + X + "\n cpt = " + cpt + " cptCombC = " + cptCmbC);
-        //X = X / 4; //division entiere pour nb ligne
-        //Y = Y % 4; // modulo pour nb colonne
 
         grilleCouleurs[X][Y].affecterCouleur("bleu");
         combChoisie[cptCmbC] = "Bleu"; // rentre magenta dans colonne pour ensuite comparer
@@ -512,6 +578,36 @@ public class fenetreDeJeu extends javax.swing.JFrame {
         repaint();
         Jeu();
     }//GEN-LAST:event_btn_bleuActionPerformed
+
+    private void btn_moyenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_moyenActionPerformed
+        // TODO add your handling code here:
+        lbl_niveauChoix.setVisible(true);
+        lbl_choixNiv.setText("moyen");
+        btn_facile.setVisible(false);
+        btn_moyen.setVisible(false);
+        btn_difficile.setVisible(false);
+        int nbcoups = Options();
+    }//GEN-LAST:event_btn_moyenActionPerformed
+
+    private void btn_difficileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_difficileActionPerformed
+        // TODO add your handling code here:
+        lbl_niveauChoix.setVisible(true);
+        lbl_choixNiv.setText("difficile");
+        btn_facile.setVisible(false);
+        btn_moyen.setVisible(false);
+        btn_difficile.setVisible(false);
+        int nbcoups = Options();
+    }//GEN-LAST:event_btn_difficileActionPerformed
+
+    private void btn_facileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_facileActionPerformed
+        // TODO add your handling code here:
+        lbl_niveauChoix.setVisible(true);
+        lbl_choixNiv.setText("facile");
+        btn_facile.setVisible(false);
+        btn_moyen.setVisible(false);
+        btn_difficile.setVisible(false);
+        int nbcoups = Options();
+    }//GEN-LAST:event_btn_facileActionPerformed
 
     //public void affecterCouleurGrille(int a,int b){
     //grilleCouleurs[a][b].
@@ -554,21 +650,28 @@ public class fenetreDeJeu extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_bleu;
     private javax.swing.JButton btn_demarrer;
+    private javax.swing.JButton btn_difficile;
+    private javax.swing.JButton btn_facile;
     private javax.swing.JButton btn_jaune;
     private javax.swing.JButton btn_magenta;
+    private javax.swing.JButton btn_moyen;
     private javax.swing.JButton btn_orange;
     private javax.swing.JButton btn_rouge;
     private javax.swing.JButton btn_vert;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JLabel lbl_choixNiv;
     private javax.swing.JTextArea lbl_combSecrete;
     private javax.swing.JLabel lbl_infos_partie;
     private javax.swing.JLabel lbl_message;
     private javax.swing.JLabel lbl_nbCoul;
+    private javax.swing.JLabel lbl_nbCoul1;
     private javax.swing.JLabel lbl_nbCoulPlacmt;
+    private javax.swing.JLabel lbl_niveauChoix;
+    private javax.swing.JLabel lbl_options;
     private javax.swing.JLabel lbl_palette_couleurs;
     private javax.swing.JLabel lbl_palette_couleurs1;
     private javax.swing.JPanel panneau_combSecrete;
@@ -576,6 +679,7 @@ public class fenetreDeJeu extends javax.swing.JFrame {
     private javax.swing.JPanel panneau_grille;
     private javax.swing.JPanel panneau_infos;
     private javax.swing.JPanel panneau_message;
+    private javax.swing.JPanel panneau_options;
     private javax.swing.JTextArea textarea_CoulOK;
     private javax.swing.JTextArea textarea_CoulPlacmtOK;
     private javax.swing.JTextArea zone_mess;

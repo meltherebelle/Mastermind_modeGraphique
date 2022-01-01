@@ -123,9 +123,9 @@ public class Combinaison {
     }
 
 
-    public boolean Gagner(int [] nbOK) {
+    public boolean Gagner(int [] nbok) {
         //on veut récuperer le NB_OK de comparaison et l'affecter à nb_ok local
-        int [] NB_OK = nbOK;
+        int [] NB_OK = nbok;
         //ensuite on compare si nb_ok dis qu'il y a un gagnant ou pas
         if ( (NB_OK[0] == 0) && (NB_OK[1] == 4) ) {
             System.out.println("nb ok gagnant");

@@ -37,7 +37,7 @@ public class fenetreDeJeu extends javax.swing.JFrame {
 
     public fenetreDeJeu() {
         initComponents();
-
+        
         zone_mess.setText("Bienvenue dans le Mastermind !\n• Choissisez un niveau\n• Cliquez sur Démarrer partie");
         lbl_niveauChoix.setVisible(false);
         panneau_grille.setVisible(false);
@@ -123,6 +123,10 @@ public class fenetreDeJeu extends javax.swing.JFrame {
 
     public String[] debuterPartie() { //on va renvoyer la combS générée en début de partie pour ne pas avoir à la regénérer
 
+        //chrono
+        StopWatch timer = new StopWatch();
+        timer.start();
+        
         if (X != 0) {
             //on rafraichie la grille
             //viderGrille(); //beug sur ordi lea
@@ -143,7 +147,7 @@ public class fenetreDeJeu extends javax.swing.JFrame {
 
     int nbCoups = Options();
 
-    public void Jeu() {
+    public boolean Jeu() {
 
         lbl_combSecrete.setText("Pour vous faciliter la tâche...\nLa combinaison secrete tirée est : " + Arrays.toString(combSecret));
         boolean finDePartie = false; //pour break des que partie finie (perdue ou gagnée)
@@ -184,11 +188,9 @@ public class fenetreDeJeu extends javax.swing.JFrame {
             }
 
         }
-
         repaint();
-
+        return finDePartie;
     }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

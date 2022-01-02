@@ -67,6 +67,10 @@ public class fenetreDeJeu extends javax.swing.JFrame {
         compteurs[2] = 0; //int cpt = 0; //compteur nb couleurs cliquées
         compteurs[3] = -1; //int cptCmbC = -1; //compteur indice pour remplir liste combChoisie
         
+        X = compteurs[0];
+        Y = compteurs[1];
+        cpt = compteurs[2];
+        cptCmbC = compteurs[3];
         return compteurs;
     }
     
@@ -145,7 +149,8 @@ public class fenetreDeJeu extends javax.swing.JFrame {
 
     public boolean Jeu(int nbCoups) {
 
-        lbl_combSecrete.setText("Pour vous faciliter la tâche...\nLa combinaison secrete tirée est : " + Arrays.toString(combSecret));
+        lbl_combSecrete.setText("La combinaison secrete tirée est : " + Arrays.toString(combSecret));
+        lbl_combSecrete.setVisible(false);
         boolean finDePartie = false; //pour break des que partie finie (perdue ou gagnée)
 
         if (cpt == 4) { //fait l'action tous les 4 clics
@@ -172,19 +177,35 @@ public class fenetreDeJeu extends javax.swing.JFrame {
             //zone_mess.setText("gagnant : "+gagner+ "");
 
             if (gagner == true) {
-                zone_mess.setText("Vous avez deviné le code secret !!! \n Appuyer sur DEMARRER pour recommencer ");// la condition marche mais ca veut pas afficher dans zone_mess
+                zone_mess.setText("Vous avez deviné le code secret !! \n \n Pour recommancer: \n choississez un NIVEAU puis appuyez sur DEMARRER ");// la condition marche mais ca veut pas afficher dans zone_mess
                 //btn_rouge.setEnabled(false); // ON POURRAIT DISABLE LA PALETTE DE COULEUR SAUF DEMMARER COMME CA ON PEUT REJOUER
                 btn_demarrer.setVisible(true); // PROBLEME creation de combSecret dans code et non dans fonction 
                 finDePartie = true;
+                lbl_combSecrete.setVisible(true);
+                btn_facile.setVisible(true);
+                btn_moyen.setVisible(true);
+                btn_difficile.setVisible(true);
             }
 
-            if ((nbCoups ==0 ) && (gagner == false)) { //perdu
-                zone_mess.setText("You're a L O S E R ... :( ");
+            if ((nbCoups == 0 ) && (gagner == false)) { //perdu
+                zone_mess.setText("You're a L O S E R ... :( \n Pour recommancer: \n choississez un NIVEAU puis appuyez sur DEMARRER  " );
+                btn_demarrer.setVisible(true);
+                panneau_couleurs.setVisible(false);
                 finDePartie = true;
+                lbl_combSecrete.setVisible(true);
+                btn_facile.setVisible(true);
+                btn_moyen.setVisible(true);
+                btn_difficile.setVisible(true);
             }
             if (finDePartie == false) {
                 zone_mess.setText("Retentez votre chance\nVeuillez choisir une prochaine combinaison de couleurs\nen cliquant sur la palette ci-dessous ;)");
             }
+            /*if(finDePartie == false){ // recommencer choix niveau
+                btn_facile.setVisible(false);
+                btn_moyen.setVisible(false);
+                btn_difficile.setVisible(false);
+                
+            }*/
         }
         repaint();
         return finDePartie;
@@ -524,7 +545,7 @@ public class fenetreDeJeu extends javax.swing.JFrame {
         cpt += 1; //nb de clic +1 pour Jeu()
         cptCmbC += 1; // compteur pour chaque cellule de combChoisie
         Y += 1;
-        zone_mess.setText("Vous avez clique sur le bouton rouge\nOn en est à Y : " + Y + " et X :" + X + "\n cpt = " + cpt + " cptCombC = " + cptCmbC);
+        //zone_mess.setText("Vous avez clique sur le bouton rouge\nOn en est à Y : " + Y + " et X :" + X + "\n cpt = " + cpt + " cptCombC = " + cptCmbC);
 
         grilleCouleurs[X][Y].affecterCouleur("rouge");
         combChoisie[cptCmbC] = "Rouge"; // rentre rouge dans colonne pour ensuite comparer
@@ -539,7 +560,7 @@ public class fenetreDeJeu extends javax.swing.JFrame {
         cpt += 1; //nb de clic +1 pour Jeu()
         cptCmbC += 1; // compteur pour chaque cellule de combChoisie
         Y += 1;
-        zone_mess.setText("Vous avez clique sur le bouton orange\nOn en est à Y : " + Y + " et X :" + X + "\n cpt = " + cpt + " cptCombC = " + cptCmbC);
+        //zone_mess.setText("Vous avez clique sur le bouton orange\nOn en est à Y : " + Y + " et X :" + X + "\n cpt = " + cpt + " cptCombC = " + cptCmbC);
 
         grilleCouleurs[X][Y].affecterCouleur("orange");
 
@@ -555,7 +576,7 @@ public class fenetreDeJeu extends javax.swing.JFrame {
         cpt += 1; //nb de clic +1 pour Jeu()
         cptCmbC += 1; // compteur pour chaque cellule de combChoisie
         Y += 1;
-        zone_mess.setText("Vous avez clique sur le bouton magenta\nOn en est à Y : " + Y + " et X :" + X + "\n cpt = " + cpt + " cptCombC = " + cptCmbC);
+        //zone_mess.setText("Vous avez clique sur le bouton magenta\nOn en est à Y : " + Y + " et X :" + X + "\n cpt = " + cpt + " cptCombC = " + cptCmbC);
 
         grilleCouleurs[X][Y].affecterCouleur("magenta");
         combChoisie[cptCmbC] = "Magenta"; // rentre magenta dans colonne pour ensuite comparer
@@ -574,7 +595,10 @@ public class fenetreDeJeu extends javax.swing.JFrame {
         lbl_coupsRestant.setVisible(true);
         lbl_coupRest.setVisible(true);
         zone_mess.setText("Veuillez choisir une combinaison de 4 couleurs\nen cliquant sur la palette ci-dessous ;)");
-        debuterPartie();
+        viderGrille();
+        compteurs = initialiserCmpt();
+        //coupRest = 
+        combSecret = debuterPartie();
         
     }//GEN-LAST:event_btn_demarrerActionPerformed
 
@@ -583,7 +607,7 @@ public class fenetreDeJeu extends javax.swing.JFrame {
         cpt += 1; //nb de clic +1 pour Jeu()
         cptCmbC += 1; // compteur pour chaque cellule de combChoisie
         Y += 1;
-        zone_mess.setText("Vous avez clique sur le bouton vert\nOn en est à Y : " + Y + " et X :" + X + "\n cpt = " + cpt + " cptCombC = " + cptCmbC);
+        //zone_mess.setText("Vous avez clique sur le bouton vert\nOn en est à Y : " + Y + " et X :" + X + "\n cpt = " + cpt + " cptCombC = " + cptCmbC);
 
         grilleCouleurs[X][Y].affecterCouleur("vert");
         combChoisie[cptCmbC] = "Vert"; // rentre magenta dans colonne pour ensuite comparer
@@ -598,7 +622,7 @@ public class fenetreDeJeu extends javax.swing.JFrame {
         cpt += 1; //nb de clic +1 pour Jeu()
         cptCmbC += 1; // compteur pour chaque cellule de combChoisie
         Y += 1;
-        zone_mess.setText("Vous avez clique sur le bouton jaune\nOn en est à Y : " + Y + " et X :" + X + "\n cpt = " + cpt + " cptCombC = " + cptCmbC);
+        //zone_mess.setText("Vous avez clique sur le bouton jaune\nOn en est à Y : " + Y + " et X :" + X + "\n cpt = " + cpt + " cptCombC = " + cptCmbC);
 
         grilleCouleurs[X][Y].affecterCouleur("jaune");
         combChoisie[cptCmbC] = "Jaune"; // rentre magenta dans colonne pour ensuite comparer
@@ -613,7 +637,7 @@ public class fenetreDeJeu extends javax.swing.JFrame {
         cpt += 1; //nb de clic +1 pour Jeu()
         cptCmbC += 1; // compteur pour chaque cellule de combChoisie
         Y += 1;
-        zone_mess.setText("Vous avez clique sur le bouton bleu\nOn en est à Y : " + Y + " et X :" + X + "\n cpt = " + cpt + " cptCombC = " + cptCmbC);
+        //zone_mess.setText("Vous avez clique sur le bouton bleu\nOn en est à Y : " + Y + " et X :" + X + "\n cpt = " + cpt + " cptCombC = " + cptCmbC);
 
         grilleCouleurs[X][Y].affecterCouleur("bleu");
         combChoisie[cptCmbC] = "Bleu"; // rentre magenta dans colonne pour ensuite comparer
@@ -645,6 +669,7 @@ public class fenetreDeJeu extends javax.swing.JFrame {
         btn_difficile.setVisible(false);
         lbl_coupRest.setText(3+"");
         Options(3,"difficile");
+        //debuterPartie();
     }//GEN-LAST:event_btn_difficileActionPerformed
 
     private void btn_facileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_facileActionPerformed

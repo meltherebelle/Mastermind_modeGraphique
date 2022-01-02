@@ -33,6 +33,12 @@ public class CelluleGraphique extends JButton {
     ImageIcon img_vert = new javax.swing.ImageIcon(getClass().getResource("/images/vert.png"));
     ImageIcon img_orange = new javax.swing.ImageIcon(getClass().getResource("/images/orange.png"));
 
+    /**
+     * creation de nos cellules graphiques, affectation couleur associée
+     * @param x
+     * @param y
+     * @param couleur
+     */
     public CelluleGraphique(int x, int y, String couleur) {
         this.cx=x;
         this.cy=y;
@@ -40,9 +46,14 @@ public class CelluleGraphique extends JButton {
         affecterCouleur(couleur);
     }
     
-    //permet de changer la couleur de cellule graphique
+
+    /**
+     * permet de changer la couleur de cellule graphique
+     * @param couleur
+     * @return la couleur a affecter
+     */
     public String affecterCouleur(String couleur) {
-        colorToAffect = couleur; //colorToAffect doit etre un attribu, non pas une variable locale
+        colorToAffect = couleur;
         return couleur;
     }
 
@@ -51,7 +62,6 @@ public class CelluleGraphique extends JButton {
     public void paintComponent(Graphics G) {
         super.paintComponent(G);
         setIcon(img_vide); //on initialise la grille en cases vides = blanc
-        //String color = //il faut récupérer la couleur cliquée dans cette variable pour ensuite faire des switch case
         
         switch (colorToAffect) {
             case "rouge" :

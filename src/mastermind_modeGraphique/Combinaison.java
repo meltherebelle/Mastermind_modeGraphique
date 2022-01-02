@@ -19,7 +19,10 @@ public class Combinaison {
     public
             String combChoisie[] = new String[4];
     
-
+    /**
+     * creer une combinaison secrete aléatoirement avec les 6 couleurs possibles
+     * @return combSecret
+     */
     public String[] combinaisonSecrete() {
 
         //creation tableau contenant les 6 couleurs possibles
@@ -42,6 +45,7 @@ public class Combinaison {
         return combSecret;
     }
 
+    //UTILITÉ POUR COMBINAISON CHOISIE EN MODE CONSOLE :
     /*public String[] combinaisonChoisie() {
 
         //on remet le tabcouleur ici en attendant de trouver une nouvelle organisation dans le code pour y acceder sans le remettre dans chaque méthode (ex --> creer une nouvelle classe de Couleur et methode TabCouelur)
@@ -72,8 +76,12 @@ public class Combinaison {
         return combChoisie;
     }*/
 
-    //compare la combinaison secrete et la combinaison choisie
-    //renvoie le nombre de bonnes couleurs et le nombre de bonne couleur+placement
+    /**
+     *compare la combinaison secrete et la combinaison choisie
+     * @param combS
+     * @param combC
+     * @return comS //renvoie le nombre de bonnes couleurs et le nombre de bonne couleur+placement
+     */
     public int[] Comparaison(String[] combS, String[] combC) {
 
         int nbCoul_OK = 0;
@@ -122,7 +130,11 @@ public class Combinaison {
         return NB_OK;
     }
 
-
+    /**
+     * permet de déterminer si le joueur est gagant apres le choix de sa combinaison
+     * @param nbok
+     * @return vrai si gagnant sinon faux
+     */
     public boolean Gagner(int [] nbok) {
         //on veut récuperer le NB_OK de comparaison et l'affecter à nb_ok local
         int [] NB_OK = nbok;

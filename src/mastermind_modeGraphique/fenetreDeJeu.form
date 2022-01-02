@@ -80,7 +80,7 @@
                       <Component id="jScrollPane1" max="32767" attributes="0"/>
                       <Group type="102" attributes="0">
                           <Component id="lbl_message" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="0" pref="319" max="32767" attributes="0"/>
+                          <EmptySpace min="0" pref="303" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
@@ -94,7 +94,7 @@
                   <Component id="lbl_message" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jScrollPane1" min="-2" pref="107" max="-2" attributes="0"/>
-                  <EmptySpace pref="15" max="32767" attributes="0"/>
+                  <EmptySpace pref="13" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -102,6 +102,9 @@
       <SubComponents>
         <Component class="javax.swing.JLabel" name="lbl_message">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Verdana" size="14" style="3"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Messages :"/>
           </Properties>
         </Component>
@@ -140,12 +143,15 @@
       <SubComponents>
         <Component class="javax.swing.JLabel" name="lbl_palette_couleurs">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Verdana" size="14" style="3"/>
+            </Property>
             <Property name="horizontalAlignment" type="int" value="2"/>
             <Property name="text" type="java.lang.String" value="   Palette de couleurs :"/>
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="0" y="0" width="200" height="70"/>
+              <AbsoluteConstraints x="0" y="10" width="200" height="70"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -252,6 +258,13 @@
             </Constraint>
           </Constraints>
         </Component>
+        <Component class="javax.swing.JSeparator" name="jSeparator3">
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+              <AbsoluteConstraints x="0" y="10" width="400" height="-1"/>
+            </Constraint>
+          </Constraints>
+        </Component>
       </SubComponents>
     </Container>
     <Container class="javax.swing.JPanel" name="panneau_infos">
@@ -272,6 +285,9 @@
       <SubComponents>
         <Component class="javax.swing.JLabel" name="lbl_infos_partie">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Verdana" size="14" style="3"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Infos partie :"/>
           </Properties>
           <Constraints>
@@ -282,21 +298,27 @@
         </Component>
         <Component class="javax.swing.JLabel" name="lbl_nbCoul">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Verdana" size="12" style="2"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="nombre de bonnes couleurs :"/>
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="30" y="50" width="200" height="73"/>
+              <AbsoluteConstraints x="30" y="80" width="200" height="20"/>
             </Constraint>
           </Constraints>
         </Component>
         <Component class="javax.swing.JLabel" name="lbl_nbCoulPlacmt">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Verdana" size="12" style="2"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="nombre de couleurs bien plac&#xe9;es :"/>
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="30" y="110" width="230" height="73"/>
+              <AbsoluteConstraints x="30" y="130" width="230" height="20"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -341,16 +363,6 @@
             </Component>
           </SubComponents>
         </Container>
-        <Component class="javax.swing.JLabel" name="lbl_nbCoul1">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="nombre de bonnes couleurs :"/>
-          </Properties>
-          <Constraints>
-            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="30" y="50" width="200" height="73"/>
-            </Constraint>
-          </Constraints>
-        </Component>
         <Component class="javax.swing.JLabel" name="lbl_numComb">
           <Properties>
             <Property name="text" type="java.lang.String" value=" "/>
@@ -358,6 +370,13 @@
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
               <AbsoluteConstraints x="270" y="30" width="120" height="-1"/>
+            </Constraint>
+          </Constraints>
+        </Component>
+        <Component class="javax.swing.JSeparator" name="jSeparator4">
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+              <AbsoluteConstraints x="0" y="0" width="400" height="-1"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -458,15 +477,21 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="lbl_coupRest" min="-2" pref="95" max="-2" attributes="0"/>
-                      <Component id="lbl_coupsRestant" min="-2" pref="140" max="-2" attributes="0"/>
-                      <Component id="lbl_options" min="-2" max="-2" attributes="0"/>
-                      <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                          <Component id="lbl_choixNiv" alignment="0" max="32767" attributes="0"/>
-                          <Component id="lbl_niveauChoix" alignment="0" max="32767" attributes="0"/>
+                      <Component id="panneau_imgresultat" max="32767" attributes="0"/>
+                      <Group type="102" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="lbl_coupRest" min="-2" pref="95" max="-2" attributes="0"/>
+                              <Component id="lbl_coupsRestant" min="-2" pref="140" max="-2" attributes="0"/>
+                              <Component id="lbl_options" min="-2" max="-2" attributes="0"/>
+                              <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                                  <Component id="lbl_choixNiv" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="lbl_niveauChoix" alignment="0" max="32767" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <EmptySpace min="0" pref="28" max="32767" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace pref="34" max="32767" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -493,7 +518,9 @@
                   <Component id="lbl_coupsRestant" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="lbl_coupRest" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="151" max="32767" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Component id="panneau_imgresultat" max="32767" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -501,6 +528,9 @@
       <SubComponents>
         <Component class="javax.swing.JLabel" name="lbl_options">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Verdana" size="14" style="3"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Options :"/>
           </Properties>
         </Component>
@@ -539,6 +569,9 @@
         </Component>
         <Component class="javax.swing.JLabel" name="lbl_niveauChoix">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Verdana" size="12" style="2"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Niveau Choisi :"/>
           </Properties>
         </Component>
@@ -557,6 +590,9 @@
         </Component>
         <Component class="javax.swing.JLabel" name="lbl_coupsRestant">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Verdana" size="12" style="2"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Coups restants :"/>
           </Properties>
         </Component>
@@ -569,6 +605,21 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="lbl_coupRestActionPerformed"/>
           </Events>
         </Component>
+        <Container class="javax.swing.JPanel" name="panneau_imgresultat">
+
+          <Layout>
+            <DimensionLayout dim="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+              </Group>
+            </DimensionLayout>
+            <DimensionLayout dim="1">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <EmptySpace min="0" pref="125" max="32767" attributes="0"/>
+              </Group>
+            </DimensionLayout>
+          </Layout>
+        </Container>
       </SubComponents>
     </Container>
   </SubComponents>

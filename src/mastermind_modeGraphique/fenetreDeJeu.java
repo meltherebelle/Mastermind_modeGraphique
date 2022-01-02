@@ -5,6 +5,7 @@
 package mastermind_modeGraphique;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.util.Arrays;
 import javax.swing.ImageIcon;
@@ -30,6 +31,7 @@ public class fenetreDeJeu extends javax.swing.JFrame {
         this.choice = lbl_choixNiv.getText();
         zone_mess.setText("Bienvenue dans le Mastermind !\n• Choissisez un niveau\n• Cliquez sur Démarrer partie");
         lbl_coupRest.setVisible(false);
+        panneau_imgresultat.setVisible(false);
         lbl_coupsRestant.setVisible(false);
         lbl_niveauChoix.setVisible(false);
         panneau_grille.setVisible(false);
@@ -58,6 +60,10 @@ public class fenetreDeJeu extends javax.swing.JFrame {
         }
     }
 
+    /**
+     * initialise les compteurs utilisés au cours de la partie
+     * @return tableau contenant nos compteurs
+     */
     public int[] initialiserCmpt() {
         
         int[] compteurs = new int[4];
@@ -74,6 +80,12 @@ public class fenetreDeJeu extends javax.swing.JFrame {
         return compteurs;
     }
     
+    /**
+     * permet de déterminer le niveau et le nombre de coups associé
+     * @param nbCoups
+     * @param choixNiv
+     * @returnle nbcoups dispo pour le jouer en fonction du niveau choisi
+     */
     public int Options(int nbCoups, String choixNiv) {
         
         String choix=choixNiv;
@@ -106,6 +118,9 @@ public class fenetreDeJeu extends javax.swing.JFrame {
         return nbcoups;
     }
 
+    /**
+     * permet de vider la grille pour commencer une nouvelle partie
+     */
     public void viderGrille() {
 
         for (int line = 0; line < 12; line++) {
@@ -116,14 +131,11 @@ public class fenetreDeJeu extends javax.swing.JFrame {
         System.out.println("Grille vidée");
     }
     
+    /**
+     * permet de creer une nouvelle partie, génère une nouvelle combinaison secrete
+     * @return cette comb secrete créée
+     */
     public String[] debuterPartie() { //on va renvoyer la combS générée en début de partie pour ne pas avoir à la regénérer
-        
-        //chrono
-        /*StopWatch timer = new StopWatch();
-        timer.start();*/
-        
-        //on rafraichit la grille
-        //viderGrille(); //beug sur ordi lea
         
         //on génère une combinaison secrete
         Combinaison cs = new Combinaison();
@@ -147,7 +159,14 @@ public class fenetreDeJeu extends javax.swing.JFrame {
     int cpt = compteurs[2];
     int cptCmbC = compteurs[3];
 
-    public boolean Jeu(int nbCoups) {
+    /**
+     * appelé à chaque couleur de comb cliquée
+     * MAJ affichages / compteurs
+     * fait appel à une comparaison des combs (couleurs & couleurs+placement)
+     * détermine si gagnant ou pas et en fonction stop la partie
+     * @param nbCoups
+     */
+    public void Jeu(int nbCoups) {
 
         lbl_combSecrete.setText("La combinaison secrete tirée est : " + Arrays.toString(combSecret));
         lbl_combSecrete.setVisible(false);
@@ -165,7 +184,33 @@ public class fenetreDeJeu extends javax.swing.JFrame {
             Combinaison compare = new Combinaison(); //on détermine les nb coul & coul + placement OK
             nbok = compare.Comparaison(combSecret, combChoisie); //on récupère le résultat de la comparaison dans un tableau
 
-            //Affichage résultats des comparaisons
+            //Affichage résultats des comparaisons avec background color
+            if (nbok[0] == 0) {
+                textarea_CoulOK.setBackground(Color.red);
+            }
+            if (nbok[1] == 0) {
+                textarea_CoulPlacmtOK.setBackground(Color.red);
+            }
+            if (nbok[0] == 1) {
+                textarea_CoulOK.setBackground(Color.lightGray);
+            }
+            if (nbok[1] == 1) {
+                textarea_CoulPlacmtOK.setBackground(Color.green);
+            }
+            if (nbok[0] == 2) {
+                textarea_CoulOK.setBackground(Color.lightGray);
+            }
+            if (nbok[1] == 2) {
+                textarea_CoulPlacmtOK.setBackground(Color.green);
+            }
+            if (nbok[0] == 3) {
+                textarea_CoulOK.setBackground(Color.lightGray);
+            }
+            
+            if (nbok[1] == 3) {
+                textarea_CoulPlacmtOK.setBackground(Color.green);
+            }
+            
             textarea_CoulOK.setText(nbok[0] + "");
             textarea_CoulPlacmtOK.setText(nbok[1] + "");
             lbl_numComb.setText("Combinaison n°"+X); //pour se repérer dans affichage résultats combinaison
@@ -178,17 +223,24 @@ public class fenetreDeJeu extends javax.swing.JFrame {
 
             if (gagner == true) {
                 zone_mess.setText("Vous avez deviné le code secret !! \n \n Pour recommancer: \n choississez un NIVEAU puis appuyez sur DEMARRER ");// la condition marche mais ca veut pas afficher dans zone_mess
-                //btn_rouge.setEnabled(false); // ON POURRAIT DISABLE LA PALETTE DE COULEUR SAUF DEMMARER COMME CA ON PEUT REJOUER
+                zone_mess.setBackground(Color.green);
+                zone_mess.setFont(new Font("Verdana", Font.PLAIN, 12));
                 btn_demarrer.setVisible(true); // PROBLEME creation de combSecret dans code et non dans fonction 
                 finDePartie = true;
                 lbl_combSecrete.setVisible(true);
                 btn_facile.setVisible(true);
                 btn_moyen.setVisible(true);
                 btn_difficile.setVisible(true);
+                //afficher image trophé
+                //ImageIcon img_vide = new javax.swing.ImageIcon(getClass().getResource("/images/trophe.png"));
+                //panneau_imgresultat(new ImageIcon(Test.class.getResource("/images/trophe.png"));
             }
 
             if ((nbCoups == 0 ) && (gagner == false)) { //perdu
                 zone_mess.setText("You're a L O S E R ... :( \n Pour recommancer: \n choississez un NIVEAU puis appuyez sur DEMARRER  " );
+                //panneau_imgresultat.setVisible(true);
+                zone_mess.setBackground(Color.red);
+                zone_mess.setFont(new Font("Verdana", Font.PLAIN, 12));
                 btn_demarrer.setVisible(true);
                 panneau_couleurs.setVisible(false);
                 finDePartie = true;
@@ -200,15 +252,8 @@ public class fenetreDeJeu extends javax.swing.JFrame {
             if (finDePartie == false) {
                 zone_mess.setText("Retentez votre chance\nVeuillez choisir une prochaine combinaison de couleurs\nen cliquant sur la palette ci-dessous ;)");
             }
-            /*if(finDePartie == false){ // recommencer choix niveau
-                btn_facile.setVisible(false);
-                btn_moyen.setVisible(false);
-                btn_difficile.setVisible(false);
-                
-            }*/
         }
         repaint();
-        return finDePartie;
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -234,6 +279,7 @@ public class fenetreDeJeu extends javax.swing.JFrame {
         btn_bleu = new javax.swing.JButton();
         btn_orange = new javax.swing.JButton();
         btn_magenta = new javax.swing.JButton();
+        jSeparator3 = new javax.swing.JSeparator();
         panneau_infos = new javax.swing.JPanel();
         lbl_infos_partie = new javax.swing.JLabel();
         lbl_nbCoul = new javax.swing.JLabel();
@@ -242,8 +288,8 @@ public class fenetreDeJeu extends javax.swing.JFrame {
         textarea_CoulPlacmtOK = new javax.swing.JTextArea();
         jScrollPane5 = new javax.swing.JScrollPane();
         textarea_CoulOK = new javax.swing.JTextArea();
-        lbl_nbCoul1 = new javax.swing.JLabel();
         lbl_numComb = new javax.swing.JLabel();
+        jSeparator4 = new javax.swing.JSeparator();
         btn_demarrer = new javax.swing.JButton();
         panneau_combSecrete = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
@@ -259,6 +305,7 @@ public class fenetreDeJeu extends javax.swing.JFrame {
         lbl_choixNiv = new javax.swing.JTextField();
         lbl_coupsRestant = new javax.swing.JLabel();
         lbl_coupRest = new javax.swing.JTextField();
+        panneau_imgresultat = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -274,6 +321,7 @@ public class fenetreDeJeu extends javax.swing.JFrame {
 
         panneau_message.setBackground(new java.awt.Color(153, 153, 153));
 
+        lbl_message.setFont(new java.awt.Font("Verdana", 3, 14)); // NOI18N
         lbl_message.setText("Messages :");
 
         zone_mess.setColumns(20);
@@ -290,7 +338,7 @@ public class fenetreDeJeu extends javax.swing.JFrame {
                     .addComponent(jScrollPane1)
                     .addGroup(panneau_messageLayout.createSequentialGroup()
                         .addComponent(lbl_message)
-                        .addGap(0, 319, Short.MAX_VALUE)))
+                        .addGap(0, 303, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         panneau_messageLayout.setVerticalGroup(
@@ -300,7 +348,7 @@ public class fenetreDeJeu extends javax.swing.JFrame {
                 .addComponent(lbl_message)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addContainerGap(13, Short.MAX_VALUE))
         );
 
         getContentPane().add(panneau_message, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 20, 400, 150));
@@ -308,9 +356,10 @@ public class fenetreDeJeu extends javax.swing.JFrame {
         panneau_couleurs.setBackground(new java.awt.Color(153, 153, 153));
         panneau_couleurs.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        lbl_palette_couleurs.setFont(new java.awt.Font("Verdana", 3, 14)); // NOI18N
         lbl_palette_couleurs.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lbl_palette_couleurs.setText("   Palette de couleurs :");
-        panneau_couleurs.add(lbl_palette_couleurs, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 200, 70));
+        panneau_couleurs.add(lbl_palette_couleurs, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 200, 70));
         panneau_couleurs.add(lbl_palette_couleurs1, new org.netbeans.lib.awtextra.AbsoluteConstraints(345, 0, 133, 70));
 
         btn_rouge.setBackground(new java.awt.Color(255, 0, 0));
@@ -366,20 +415,24 @@ public class fenetreDeJeu extends javax.swing.JFrame {
             }
         });
         panneau_couleurs.add(btn_magenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(266, 180, 130, 100));
+        panneau_couleurs.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 400, -1));
 
         getContentPane().add(panneau_couleurs, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 360, 400, 280));
 
         panneau_infos.setBackground(new java.awt.Color(153, 153, 153));
         panneau_infos.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        lbl_infos_partie.setFont(new java.awt.Font("Verdana", 3, 14)); // NOI18N
         lbl_infos_partie.setText("Infos partie :");
         panneau_infos.add(lbl_infos_partie, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 200, 73));
 
+        lbl_nbCoul.setFont(new java.awt.Font("Verdana", 2, 12)); // NOI18N
         lbl_nbCoul.setText("nombre de bonnes couleurs :");
-        panneau_infos.add(lbl_nbCoul, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, 200, 73));
+        panneau_infos.add(lbl_nbCoul, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, 200, 20));
 
+        lbl_nbCoulPlacmt.setFont(new java.awt.Font("Verdana", 2, 12)); // NOI18N
         lbl_nbCoulPlacmt.setText("nombre de couleurs bien placées :");
-        panneau_infos.add(lbl_nbCoulPlacmt, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, 230, 73));
+        panneau_infos.add(lbl_nbCoulPlacmt, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 130, 230, 20));
 
         textarea_CoulPlacmtOK.setColumns(2);
         textarea_CoulPlacmtOK.setRows(1);
@@ -394,11 +447,9 @@ public class fenetreDeJeu extends javax.swing.JFrame {
 
         panneau_infos.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 60, 120, 50));
 
-        lbl_nbCoul1.setText("nombre de bonnes couleurs :");
-        panneau_infos.add(lbl_nbCoul1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, 200, 73));
-
         lbl_numComb.setText(" ");
         panneau_infos.add(lbl_numComb, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 30, 120, -1));
+        panneau_infos.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, -1));
 
         getContentPane().add(panneau_infos, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 170, 400, 190));
 
@@ -438,6 +489,7 @@ public class fenetreDeJeu extends javax.swing.JFrame {
 
         panneau_options.setBackground(new java.awt.Color(153, 153, 153));
 
+        lbl_options.setFont(new java.awt.Font("Verdana", 3, 14)); // NOI18N
         lbl_options.setText("Options :");
 
         btn_moyen.setBackground(new java.awt.Color(255, 204, 51));
@@ -464,6 +516,7 @@ public class fenetreDeJeu extends javax.swing.JFrame {
             }
         });
 
+        lbl_niveauChoix.setFont(new java.awt.Font("Verdana", 2, 12)); // NOI18N
         lbl_niveauChoix.setText("Niveau Choisi :");
 
         lbl_choixNiv.setText(" ");
@@ -474,6 +527,7 @@ public class fenetreDeJeu extends javax.swing.JFrame {
             }
         });
 
+        lbl_coupsRestant.setFont(new java.awt.Font("Verdana", 2, 12)); // NOI18N
         lbl_coupsRestant.setText("Coups restants :");
 
         lbl_coupRest.setText("0");
@@ -483,6 +537,17 @@ public class fenetreDeJeu extends javax.swing.JFrame {
                 lbl_coupRestActionPerformed(evt);
             }
         });
+
+        javax.swing.GroupLayout panneau_imgresultatLayout = new javax.swing.GroupLayout(panneau_imgresultat);
+        panneau_imgresultat.setLayout(panneau_imgresultatLayout);
+        panneau_imgresultatLayout.setHorizontalGroup(
+            panneau_imgresultatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        panneau_imgresultatLayout.setVerticalGroup(
+            panneau_imgresultatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 125, Short.MAX_VALUE)
+        );
 
         javax.swing.GroupLayout panneau_optionsLayout = new javax.swing.GroupLayout(panneau_options);
         panneau_options.setLayout(panneau_optionsLayout);
@@ -500,13 +565,17 @@ public class fenetreDeJeu extends javax.swing.JFrame {
             .addGroup(panneau_optionsLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(panneau_optionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lbl_coupRest, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbl_coupsRestant, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbl_options)
-                    .addGroup(panneau_optionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(lbl_choixNiv, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(lbl_niveauChoix, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap(34, Short.MAX_VALUE))
+                    .addComponent(panneau_imgresultat, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(panneau_optionsLayout.createSequentialGroup()
+                        .addGroup(panneau_optionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lbl_coupRest, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lbl_coupsRestant, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lbl_options)
+                            .addGroup(panneau_optionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(lbl_choixNiv, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(lbl_niveauChoix, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGap(0, 28, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         panneau_optionsLayout.setVerticalGroup(
             panneau_optionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -531,7 +600,9 @@ public class fenetreDeJeu extends javax.swing.JFrame {
                 .addComponent(lbl_coupsRestant)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lbl_coupRest, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(151, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(panneau_imgresultat, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         getContentPane().add(panneau_options, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 20, 180, 620));
@@ -597,8 +668,8 @@ public class fenetreDeJeu extends javax.swing.JFrame {
         zone_mess.setText("Veuillez choisir une combinaison de 4 couleurs\nen cliquant sur la palette ci-dessous ;)");
         viderGrille();
         compteurs = initialiserCmpt();
-        //coupRest = 
         combSecret = debuterPartie();
+        
         
     }//GEN-LAST:event_btn_demarrerActionPerformed
 
@@ -669,7 +740,6 @@ public class fenetreDeJeu extends javax.swing.JFrame {
         btn_difficile.setVisible(false);
         lbl_coupRest.setText(3+"");
         Options(3,"difficile");
-        //debuterPartie();
     }//GEN-LAST:event_btn_difficileActionPerformed
 
     private void btn_facileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_facileActionPerformed
@@ -692,9 +762,6 @@ public class fenetreDeJeu extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_lbl_coupRestActionPerformed
 
-    //public void affecterCouleurGrille(int a,int b){
-    //grilleCouleurs[a][b].
-    //}
     /**
      * @param args the command line arguments
      */
@@ -748,6 +815,8 @@ public class fenetreDeJeu extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JSeparator jSeparator3;
+    private javax.swing.JSeparator jSeparator4;
     private javax.swing.JTextField lbl_choixNiv;
     private javax.swing.JTextArea lbl_combSecrete;
     private javax.swing.JTextField lbl_coupRest;
@@ -755,7 +824,6 @@ public class fenetreDeJeu extends javax.swing.JFrame {
     private javax.swing.JLabel lbl_infos_partie;
     private javax.swing.JLabel lbl_message;
     private javax.swing.JLabel lbl_nbCoul;
-    private javax.swing.JLabel lbl_nbCoul1;
     private javax.swing.JLabel lbl_nbCoulPlacmt;
     private javax.swing.JLabel lbl_niveauChoix;
     private javax.swing.JLabel lbl_numComb;
@@ -765,6 +833,7 @@ public class fenetreDeJeu extends javax.swing.JFrame {
     private javax.swing.JPanel panneau_combSecrete;
     private javax.swing.JPanel panneau_couleurs;
     private javax.swing.JPanel panneau_grille;
+    private javax.swing.JPanel panneau_imgresultat;
     private javax.swing.JPanel panneau_infos;
     private javax.swing.JPanel panneau_message;
     private javax.swing.JPanel panneau_options;
